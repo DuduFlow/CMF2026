@@ -1354,3 +1354,62 @@ main { padding-top: 0 !important; }
 .app-page.section .section-head {
   margin-top: 0 !important;
 }
+
+/* 2026-06-17 mobile header correction: true compact 64px header */
+.topbar {
+  height: 64px !important;
+  overflow: hidden !important;
+  background: rgba(255, 253, 247, .72) !important;
+  backdrop-filter: blur(18px) saturate(1.18) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.18) !important;
+}
+.topbar-inner {
+  height: 64px !important;
+  min-height: 64px !important;
+  max-height: 64px !important;
+  width: min(100%, 430px) !important;
+  padding: 0 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+  overflow: hidden !important;
+}
+.header-brand {
+  flex: 1 1 auto !important;
+  width: auto !important;
+  max-width: calc(100% - 104px) !important;
+  height: 48px !important;
+  display: flex !important;
+  align-items: center !important;
+  overflow: hidden !important;
+}
+.header-brand img {
+  width: auto !important;
+  max-width: 100% !important;
+  height: 48px !important;
+  max-height: 48px !important;
+  object-fit: contain !important;
+  object-position: left center !important;
+}
+.prep-button {
+  position: static !important;
+  flex: 0 0 auto !important;
+  transform: none !important;
+  min-height: 34px !important;
+  height: 34px !important;
+  padding: 0 14px !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+}
+.prep-button:active { transform: scale(.96) !important; }
+main { padding-top: 0 !important; }
+.hero { min-height: calc(100svh - 64px) !important; }
+.app-page.section { padding-top: 88px !important; }
+
+@media (max-width: 430px) {
+  .topbar-inner { width: 100% !important; padding: 0 12px !important; gap: 8px !important; }
+  .header-brand { max-width: calc(100% - 96px) !important; height: 44px !important; }
+  .header-brand img { height: 44px !important; max-height: 44px !important; }
+  .prep-button { height: 32px !important; min-height: 32px !important; padding: 0 12px !important; font-size: 12px !important; }
+}
