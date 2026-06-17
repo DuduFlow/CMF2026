@@ -573,11 +573,14 @@
         const roomKey = `${stay.key}Room`;
         const roomNo = personRoom[roomKey] || "";
         const single = personRoom.single || personRoom[`${stay.key}Single`] || singleRoomNames.has(personName);
-        const roommates = roomNo
-          ? roster
-              .filter((item) => item[1] !== personName && (roomAssignments[item[1]] || {})[roomKey] === roomNo)
-              .map((item) => item[1])
-          : [];
+        const roommates = roster
+          .filter((item) => item[1] !== personName)
+          .filter((item) => {
+            const otherRoom = roomAssignments[item[1]] || {};
+            if (roomNo && otherRoom[roomKey] === roomNo) return true;
+            return personRoom.group && otherRoom.group === personRoom.group;
+          })
+          .map((item) => item[1]);
         const roommateText = single ? "單人房" : (roommates.length ? roommates.join("、") : "待補");
         return `
           <div class="room-stay">
