@@ -191,6 +191,102 @@
       [85,"邱仲恩","富吳通訊處"],[86,"范毓斌","富占通訊處"]
     ];
 
+    const stayPlans = [
+      { key: "qingdao", city: "青島", hotel: "青島金水皇冠假日飯店" },
+      { key: "jinan", city: "濟南", hotel: "濟南美悅雲禧飯店" }
+    ];
+
+    const singleRoomNames = new Set();
+
+    const roomAssignments = {
+      // 由濟南房號.xlsx 匯入；同一房號組只需填一次飯店房號，整組會共用。
+      "許智雄": {"group": "1", "single": false},
+      "謝政男": {"group": "1", "single": false},
+      "何宜家": {"group": "2", "single": false},
+      "蕭宇晴": {"group": "2", "single": false},
+      "何宜庭": {"group": "3", "single": false},
+      "蕭如菁": {"group": "3", "single": false},
+      "戴東志": {"group": "4", "single": false},
+      "詹政杰": {"group": "4", "single": false},
+      "吳睿綝": {"group": "5", "single": false},
+      "陳懷柔": {"group": "5", "single": false},
+      "陳其呈": {"group": "6", "single": false},
+      "黃柏瑞": {"group": "6", "single": false},
+      "陳尚禾": {"group": "7", "single": false},
+      "陳武均": {"group": "7", "single": false},
+      "宋里安": {"group": "8", "single": false},
+      "陳昶聿": {"group": "8", "single": false},
+      "賴芯甯": {"group": "9", "single": false},
+      "高泰琳": {"group": "9", "single": false},
+      "王姵慈": {"group": "10", "single": false},
+      "許瓊云": {"group": "10", "single": false},
+      "吳佩姗": {"group": "11", "single": false},
+      "賴含怡": {"group": "11", "single": false},
+      "廖冠傑": {"group": "12", "single": false},
+      "王鄆郅": {"group": "12", "single": false},
+      "王騌捷": {"group": "13", "single": false},
+      "黃金隆": {"group": "13", "single": false},
+      "呂顏伃": {"group": "14", "single": false},
+      "陳怡諳": {"group": "14", "single": false},
+      "彭莉柔": {"group": "15", "single": false},
+      "陳盈蓁": {"group": "15", "single": false},
+      "周易慶": {"group": "16", "single": false},
+      "林建璋": {"group": "16", "single": false},
+      "李奕寬": {"group": "17", "single": false},
+      "黃彥融": {"group": "17", "single": false},
+      "吳修毅": {"group": "18", "single": false},
+      "李孟珊": {"group": "18", "single": false},
+      "謝宇軒": {"group": "19", "single": false},
+      "鄭丞哲": {"group": "19", "single": false},
+      "徐瀚": {"group": "20", "single": false},
+      "戴孜安": {"group": "20", "single": false},
+      "侯宏詣": {"group": "21", "single": false},
+      "許嘉晉": {"group": "21", "single": false},
+      "王昱文": {"group": "22", "single": false},
+      "簡宏鈞": {"group": "22", "single": false},
+      "林桂安": {"group": "23", "single": false},
+      "管卓鈞": {"group": "23", "single": false},
+      "潘韻竹": {"group": "24", "single": false},
+      "簡姵萱": {"group": "24", "single": false},
+      "傅佳旻": {"group": "25", "single": false},
+      "徐維鈴": {"group": "25", "single": false},
+      "林宜潔": {"group": "26", "single": false},
+      "鍾怡婷": {"group": "26", "single": false},
+      "王思嵐": {"group": "27", "single": false},
+      "顏明儀": {"group": "27", "single": false},
+      "吳品萱": {"group": "28", "single": false},
+      "林芳誼": {"group": "28", "single": false},
+      "余妏珊": {"group": "29", "single": false},
+      "余若馨": {"group": "29", "single": false},
+      "吳沛錞": {"group": "30", "single": false},
+      "李婕詠": {"group": "30", "single": false},
+      "黃馨葦": {"group": "31", "single": true},
+      "張國興": {"group": "32", "single": false},
+      "蔡承遠": {"group": "32", "single": false},
+      "王銘宏": {"group": "33", "single": false},
+      "高智源": {"group": "33", "single": false},
+      "廖宇翔": {"group": "34", "single": false},
+      "洪敬忠": {"group": "34", "single": false},
+      "張祐珮": {"group": "35", "single": false},
+      "施昕余": {"group": "35", "single": false},
+      "吳皓誠": {"group": "36", "single": false},
+      "張家瑋": {"group": "36", "single": false},
+      "林宏威": {"group": "37", "single": false},
+      "馬英傑": {"group": "37", "single": false},
+      "廖家慧": {"group": "38", "single": false},
+      "陳怡萍": {"group": "38", "single": false},
+      "葉金玲": {"group": "39", "single": false},
+      "陳龍生": {"group": "39", "single": false},
+      "吳士侃": {"group": "40", "single": false},
+      "林瑋": {"group": "40", "single": false},
+      "曾翊雯": {"group": "41", "single": false},
+      "王原軍": {"group": "41", "single": false},
+      "孫振文": {"group": "42", "single": false, "qingdaoRoom": "1111", "jinanRoom": "2222"},
+      "鄭占禮": {"group": "42", "single": false, "qingdaoRoom": "1111", "jinanRoom": "2222"},
+      "邱仲恩": {"group": "43", "single": true},
+      "范毓斌": {"group": "44", "single": true},
+    };
+
     const $ = (selector) => document.querySelector(selector);
     const $$ = (selector) => [...document.querySelectorAll(selector)];
     const esc = (value) => String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
@@ -471,11 +567,33 @@
         $("#rosterResult").innerHTML = `<div class="result-name">找不到資料</div><div>請確認姓名是否與名單一致，或只輸入其中一個字查詢。</div>`;
         return;
       }
+      const personName = person[1];
+      const personRoom = roomAssignments[personName] || {};
+      const stayHtml = stayPlans.map((stay) => {
+        const roomKey = `${stay.key}Room`;
+        const roomNo = personRoom[roomKey] || "";
+        const single = personRoom.single || personRoom[`${stay.key}Single`] || singleRoomNames.has(personName);
+        const roommates = roomNo
+          ? roster
+              .filter((item) => item[1] !== personName && (roomAssignments[item[1]] || {})[roomKey] === roomNo)
+              .map((item) => item[1])
+          : [];
+        const roommateText = single ? "單人房" : (roommates.length ? roommates.join("、") : "待補");
+        return `
+          <div class="room-stay">
+            <div class="room-stay-head">
+              <span>${esc(stay.city)}</span>
+              <b>${esc(stay.hotel)}</b>
+            </div>
+            <div class="room-detail"><span>房號</span><b>${esc(roomNo || "待補")}</b></div>
+            <div class="room-detail"><span>室友</span><b>${esc(roommateText)}</b></div>
+          </div>
+        `;
+      }).join("");
       $("#rosterResult").innerHTML = `
-        <div class="result-name">${esc(person[1])}</div>
-        <div>${esc(person[2])} · 編號 ${esc(person[0])}</div>
-        <div class="result-line"><span>青島</span><span>青島金水皇冠假日飯店</span></div>
-        <div class="result-line"><span>濟南</span><span>美悅雲禧飯店</span></div>
+        <div class="result-name">${esc(personName)}</div>
+        <div class="result-unit">${esc(person[2])}</div>
+        ${stayHtml}
       `;
     }
 
@@ -493,7 +611,7 @@
       const exact = roster.find((person) => person[1] === query);
       if (exact) renderRosterResult(exact);
       if (!query) {
-        $("#rosterResult").innerHTML = `<div class="result-name">尚未查詢</div><div>輸入姓名查編號、單位、飯店。</div>`;
+        $("#rosterResult").innerHTML = `<div class="result-name">尚未查詢</div><div>輸入姓名查住宿飯店、房號與室友。</div>`;
       }
     }
 

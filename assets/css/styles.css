@@ -1066,6 +1066,12 @@
       font-weight: 950;
     }
 
+    .result-unit {
+      color: rgba(255, 255, 255, .82);
+      font-size: 15px;
+      font-weight: 850;
+    }
+
     .result-line {
       display: flex;
       justify-content: space-between;
@@ -1074,6 +1080,41 @@
       border-top: 1px solid rgba(255, 255, 255, .2);
       color: rgba(255, 255, 255, .82);
       font-size: 14px;
+    }
+
+    .room-stay {
+      display: grid;
+      gap: 8px;
+      margin-top: 8px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, .2);
+    }
+
+    .room-stay-head,
+    .room-detail {
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr);
+      gap: 12px;
+      align-items: baseline;
+    }
+
+    .room-stay-head span,
+    .room-detail span {
+      color: rgba(255, 255, 255, .68);
+      font-size: 13px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .room-stay-head b,
+    .room-detail b {
+      min-width: 0;
+      color: rgba(255, 255, 255, .92);
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.35;
+      text-align: right;
+      text-wrap: balance;
     }
 
     .room-hotels {
