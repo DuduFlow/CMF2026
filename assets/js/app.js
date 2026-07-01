@@ -41,7 +41,7 @@
         ["07:00", "飯店早餐", "飯店餐廳自行用餐。"],
         ["上午", "青島啤酒博物館", "1903 年舊啤酒廠原址。"],
         ["午餐", "匯豐苑（中山路大鮑島店）", "膠東海鮮與經典魯菜。"],
-        ["14:37-17:20", "高鐵 G1074 青島 → 濟南", "抵達濟南，入住飯店。"],
+        ["14:36-17:20", "高鐵 G1074 青島 → 濟南", "抵達濟南，入住飯店。"],
         ["晚餐", "環聯夜市自理", "小吃、燒烤。"]
       ]},
       { id: "d3", no: "DAY 3", date: "2026.07.16（四）", key: "2026-07-16", title: "泰山", tone: "中天門、南天門、天街、玉皇頂。", img: image.d3, tags: ["tour", "food"], items: [
@@ -202,7 +202,7 @@
     const singleRoomNames = new Set();
 
     const roomAssignments = {
-      // 由濟南房號_總表_吃飯桌次更新.xlsx 匯入；主桌視為晚宴桌次，處經理免課程分組。
+      // 由 data/濟南房號_總表_吃飯桌次更新.xlsx 匯入；車次座位另由 train-data.js 同步。
       "許智雄": {"group": "1", "single": false, "diningTable": "第1桌", "dinnerTable": "第9桌", "courseGroup": "第9組", "courseLeader": "許智雄", "courseExempt": false, "isCourseLeader": true},
       "謝政男": {"group": "1", "single": false, "diningTable": "第1桌", "dinnerTable": "第6桌", "courseGroup": "第6組", "courseLeader": "洪敬忠", "courseExempt": false, "isCourseLeader": false},
       "何宜家": {"group": "2", "single": false, "diningTable": "第1桌", "dinnerTable": "主桌", "courseGroup": "", "courseLeader": "", "courseExempt": true, "isCourseLeader": false},
@@ -578,6 +578,8 @@
       }
       const personName = person[1];
       const personRoom = roomAssignments[personName] || {};
+      const trainInfo = window.CMF_TRAIN_INFO || {};
+      const trainSeat = (window.CMF_TRAIN_ASSIGNMENTS || {})[personName] || {};
       const courseMainText = personRoom.courseGroup || (personRoom.courseExempt ? "免分組" : "待補");
       const courseSubText = personRoom.courseLeader
         ? `組長：${esc(personRoom.courseLeader)}`
@@ -596,6 +598,22 @@
             <span>課程分組</span>
             <b>${esc(courseMainText)}</b>
             ${courseSubText ? `<small>${courseSubText}</small>` : ""}
+          </div>
+        </div>
+      `;
+      const trainHtml = `
+        <div class="train-ticket">
+          <div class="train-ticket-head">
+            <span>高鐵座位</span>
+            <b>${esc(trainInfo.trainNo || "G1074")}</b>
+          </div>
+          <div class="train-ticket-route">
+            <strong>${esc(trainInfo.route || "青島 → 濟南")}</strong>
+            <small>${esc(trainInfo.date || "7/15")}｜${esc(trainInfo.time || "14:36–17:20")}</small>
+          </div>
+          <div class="train-ticket-seat">
+            <span>車廂 <b>${esc(trainSeat.car || "待補")}</b></span>
+            <span>座位 <b>${esc(trainSeat.seat || "待補")}</b></span>
           </div>
         </div>
       `;
@@ -626,6 +644,7 @@
       $("#rosterResult").innerHTML = `
         <div class="result-name">${esc(personName)}</div>
         <div class="result-unit">${esc(person[2])}</div>
+        ${trainHtml}
         ${assignmentHtml}
         ${stayHtml}
       `;
@@ -645,7 +664,7 @@
       const exact = roster.find((person) => person[1] === query);
       if (exact) renderRosterResult(exact);
       if (!query) {
-        $("#rosterResult").innerHTML = `<div class="result-name">尚未查詢</div><div>輸入姓名查用餐桌次、晚宴桌次、課程分組與住宿。</div>`;
+        $("#rosterResult").innerHTML = `<div class="result-name">尚未查詢</div><div>輸入姓名查高鐵座位、桌次、課程分組與住宿。</div>`;
       }
     }
 
