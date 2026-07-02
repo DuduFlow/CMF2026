@@ -580,6 +580,7 @@
       const personRoom = roomAssignments[personName] || {};
       const trainInfo = window.CMF_TRAIN_INFO || {};
       const trainSeat = (window.CMF_TRAIN_ASSIGNMENTS || {})[personName] || {};
+      const latestAssignment = (window.CMF_LATEST_ASSIGNMENTS || {})[personName] || {};
       const courseMainText = personRoom.courseGroup || (personRoom.courseExempt ? "免分組" : "待補");
       const courseSubText = personRoom.courseLeader
         ? `組長：${esc(personRoom.courseLeader)}`
@@ -588,7 +589,7 @@
         <div class="assignment-grid">
           <div class="assignment-box">
             <span>用餐桌次</span>
-            <b>${esc(personRoom.diningTable || "待補")}</b>
+            <b>${esc(latestAssignment.diningTable || personRoom.diningTable || "待補")}</b>
           </div>
           <div class="assignment-box">
             <span>晚宴桌次</span>
@@ -615,6 +616,13 @@
             <span>車廂 <b>${esc(trainSeat.car || "待補")}</b></span>
             <span>座位 <b>${esc(trainSeat.seat || "待補")}</b></span>
           </div>
+        </div>
+      `;
+      const busHtml = `
+        <div class="bus-assignment">
+          <span>遊覽車次</span>
+          <b>${esc(latestAssignment.tourBus || "待補")}</b>
+          <small>全程請依此車次集合</small>
         </div>
       `;
       const stayHtml = stayPlans.map((stay) => {
@@ -645,6 +653,7 @@
         <div class="result-name">${esc(personName)}</div>
         <div class="result-unit">${esc(person[2])}</div>
         ${trainHtml}
+        ${busHtml}
         ${assignmentHtml}
         ${stayHtml}
       `;
@@ -664,7 +673,7 @@
       const exact = roster.find((person) => person[1] === query);
       if (exact) renderRosterResult(exact);
       if (!query) {
-        $("#rosterResult").innerHTML = `<div class="result-name">尚未查詢</div><div>輸入姓名查高鐵座位、桌次、課程分組與住宿。</div>`;
+        $("#rosterResult").innerHTML = `<div class="result-name">尚未查詢</div><div>輸入姓名查高鐵座位、遊覽車次、桌次與住宿。</div>`;
       }
     }
 
