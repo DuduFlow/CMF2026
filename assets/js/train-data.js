@@ -2,7 +2,16 @@ window.CMF_TRAIN_INFO = {
   date: "2026.07.15（三）",
   trainNo: "G1074",
   route: "青島 → 濟南",
-  time: "14:36–17:20"
+  time: "14:36–17:20",
+  return: {
+    date: "2026.07.21（二）",
+    trainNo: "G5597",
+    route: "濟南 → 青島機場",
+    time: "08:37–10:38",
+    duration: "2 小時 1 分",
+    note: "直達",
+    ticketOpen: "7 月 7 日 14:15 開賣"
+  }
 };
 
 window.CMF_TRAIN_ASSIGNMENTS = Object.fromEntries([

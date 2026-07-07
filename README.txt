@@ -7,7 +7,7 @@
 - index.html：頁面內容
 - assets/css/styles.css：版面與手機 app 介面樣式
 - assets/js/app.js：分頁、搜尋、篩選、房間查詢
-- assets/js/train-data.js：由 Excel 匯入的 G1074 車廂與座位資料
+- assets/js/train-data.js：由 Excel 匯入的 G1074 車廂與座位資料，並包含回程 G5597 高鐵班次
 - assets/js/latest-data.js：由最新版 Excel 匯入的用餐桌次與遊覽車次資料
 - assets/images/：正式使用的網頁圖片素材
 - assets/images/user-src/：封面、行程、景點、餐廳、住宿圖片
