@@ -891,6 +891,48 @@
     bindSegmented("#courseFilters", filterCourses);
     bindSegmented("#placeFilters", filterPlaces);
 
+    // 下拉更新：頁面頂端往下拉超過門檻，放開即重新載入（配合 SW 網路優先，一定拿到最新版）
+    (function setupPullToRefresh() {
+      const ptr = $("#ptr");
+      if (!ptr || !("ontouchstart" in window)) return;
+      const label = ptr.querySelector("span");
+      const THRESHOLD = 75;
+      let startY = 0;
+      let pulling = false;
+      let dist = 0;
+      window.addEventListener("touchstart", (event) => {
+        if (window.scrollY > 0) { pulling = false; return; }
+        startY = event.touches[0].clientY;
+        pulling = true;
+        dist = 0;
+      }, { passive: true });
+      window.addEventListener("touchmove", (event) => {
+        if (!pulling) return;
+        dist = event.touches[0].clientY - startY;
+        if (dist <= 10 || window.scrollY > 0) {
+          ptr.classList.remove("show", "ready");
+          return;
+        }
+        const pull = Math.min(dist, 130);
+        ptr.style.setProperty("--pull", `${pull}px`);
+        ptr.classList.add("show");
+        ptr.classList.toggle("ready", pull >= THRESHOLD);
+        label.textContent = pull >= THRESHOLD ? "放開立即更新" : "下拉更新";
+      }, { passive: true });
+      window.addEventListener("touchend", () => {
+        if (!pulling) return;
+        pulling = false;
+        if (dist >= THRESHOLD && window.scrollY <= 0) {
+          label.textContent = "更新中…";
+          ptr.classList.add("loading");
+          setTimeout(() => location.reload(), 120);
+        } else {
+          ptr.classList.remove("show", "ready");
+        }
+        dist = 0;
+      }, { passive: true });
+    })();
+
     // 離線快取：GitHub Pages / 靜態主機上自動啟用
     if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
       window.addEventListener("load", () => {
