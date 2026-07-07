@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Ma+Shan+Zheng&family=Noto+Serif+TC:wght@700;900&display=swap');
+/* 字體改由 index.html 以非阻塞 <link> 載入（中國境內失敗時自動退回系統字體） */
 
 :root {
       --ink: #16201f;
@@ -23,9 +23,7 @@
     body {
       margin: 0;
       color: var(--ink);
-      background:
-        linear-gradient(180deg, rgba(20, 89, 78, .12), rgba(247, 243, 234, .96) 460px),
-        var(--paper);
+      background: #0d1718; /* 手機框外的底色；main 內另有紙色漸層 */
       font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
@@ -198,17 +196,6 @@
     }
 
 
-    @media (max-width: 390px) {
-      .topbar-inner { padding: 0 10px; gap: 7px; }
-      .header-brand { gap: 6px; }
-      .brand-mark { width: 39px; height: 39px; }
-      .brand-title { font-size: 24px; letter-spacing: .025em; transform: translateY(1px) scaleX(1.01); }
-      .brand-divider { height: 27px; margin-left: 1px; margin-right: 1px; }
-      .brand-event b { font-size: 17.5px; }
-      .brand-event small { font-size: 8px; letter-spacing: .13em; }
-      .prep-button { height: 32px; min-height: 32px; padding: 0 11px; font-size: 12px; }
-    }
-
     .hero {
       position: relative;
       min-height: calc(100svh - 64px);
@@ -371,6 +358,26 @@
       font-size: 14px;
       font-weight: 950;
       letter-spacing: .08em;
+    }
+
+    .countdown-meet {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      color: var(--terra);
+      background: rgba(189, 98, 56, .1);
+      border: 1px solid rgba(189, 98, 56, .22);
+      font-size: 12.5px;
+      font-weight: 950;
+      letter-spacing: .03em;
+    }
+
+    .flight-card .meet-time {
+      display: inline;
+      color: var(--terra);
+      font-size: inherit;
+      font-weight: 950;
     }
 
     .flight-list {
@@ -553,6 +560,71 @@
       border-color: var(--jade);
     }
 
+    /* D1–D8 快跳列（行程頁深色底） */
+    .day-jump {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .day-jump::-webkit-scrollbar { display: none; }
+
+    .day-jump button {
+      flex: 0 0 auto;
+      display: grid;
+      justify-items: center;
+      gap: 1px;
+      min-width: 54px;
+      min-height: 44px;
+      padding: 6px 10px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: var(--radius-sm);
+      color: rgba(255, 255, 255, .82);
+      background: rgba(255, 255, 255, .07);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 950;
+      line-height: 1.15;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+
+    .day-jump button span {
+      color: rgba(255, 255, 255, .55);
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .day-jump button:active { transform: scale(.94); }
+
+    .day-jump button.today {
+      color: #16201f;
+      background: #f7dca3;
+      border-color: #f7dca3;
+    }
+
+    .day-jump button.today span { color: rgba(22, 32, 31, .6); }
+
+    .today-flag {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      color: #16201f;
+      background: #f7dca3;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 950;
+      vertical-align: middle;
+    }
+
+    .day-card.day-focus {
+      border-color: rgba(247, 220, 163, .85);
+      box-shadow: 0 0 0 3px rgba(247, 220, 163, .35);
+    }
+
     .day-list {
       display: grid;
       gap: 14px;
@@ -731,7 +803,23 @@
       white-space: nowrap;
     }
 
-    .course-rows { padding: 6px 18px; }
+    /* 手風琴平滑展開（grid-template-rows 0fr → 1fr） */
+    .course-rows-wrap {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .32s ease;
+    }
+
+    .course-rows-wrap.open { grid-template-rows: 1fr; }
+
+    .course-rows {
+      overflow: hidden;
+      min-height: 0;
+      padding: 0 18px;
+      transition: padding .32s ease;
+    }
+
+    .course-rows-wrap.open .course-rows { padding: 6px 18px; }
     .course-row {
       display: grid;
       grid-template-columns: 118px minmax(0, 1fr);
@@ -760,7 +848,7 @@
         linear-gradient(135deg, rgba(255, 253, 247, .98), rgba(247, 232, 196, .72)),
         #fffdf7;
       box-shadow: 0 16px 38px rgba(196, 155, 82, .18);
-      animation: featuredPulse 2.8s ease-in-out infinite;
+      animation: featuredPulse 2.8s ease-in-out 4; /* 有限次數，省電 */
       transition: box-shadow .18s ease, transform .18s ease;
     }
 
@@ -776,7 +864,7 @@
       width: 38%;
       transform: rotate(18deg);
       background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .78), transparent);
-      animation: featuredSheen 3.6s ease-in-out infinite;
+      animation: featuredSheen 3.6s ease-in-out 3;
       pointer-events: none;
     }
 
@@ -1050,6 +1138,7 @@
     }
 
     .result-card {
+      scroll-margin-top: 84px; /* 自動捲動時避開固定頂欄 */
       min-height: 176px;
       border-radius: var(--radius);
       padding: 22px;
@@ -1072,205 +1161,201 @@
       font-weight: 850;
     }
 
-    .train-ticket {
-      display: grid;
-      grid-template-columns: minmax(0, 1.25fr) auto;
-      gap: 8px 14px;
-      margin-top: 12px;
-      padding: 14px;
-      border: 1px solid rgba(255, 255, 255, .28);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, .13);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12);
-    }
-
-    .train-ticket-head {
-      grid-column: 1 / -1;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    /* 查詢結果：分區卡 + 狀態膠囊 + 進場動畫 */
+    .result-card.has-result {
+      align-content: start;
       gap: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px dashed rgba(255, 255, 255, .24);
     }
 
-    .train-ticket-head span,
-    .train-ticket-route small,
-    .train-ticket-seat span {
-      color: rgba(255, 255, 255, .72);
-      font-size: 12px;
-      font-weight: 850;
+    .result-card.result-updated {
+      animation: resultPulse .42s ease both;
     }
 
-    .train-ticket-head b {
-      font-size: 18px;
-      letter-spacing: .05em;
+    @keyframes resultPulse {
+      from { transform: translateY(8px); opacity: .88; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
-    .train-ticket-route {
-      min-width: 0;
+    .lookup-sections {
       display: grid;
-      gap: 4px;
-      align-content: center;
+      gap: 12px;
     }
 
-    .train-ticket-route strong {
-      font-size: 17px;
-      line-height: 1.25;
+    .lookup-section {
+      padding: 13px;
+      border: 1px solid rgba(255, 255, 255, .2);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, .09);
+      animation: sectionRise .45s ease both;
+      animation-delay: var(--section-delay, 0ms);
     }
 
-    .train-ticket-seat {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding-left: 14px;
-      border-left: 1px solid rgba(255, 255, 255, .2);
+    @keyframes sectionRise {
+      from { transform: translateY(10px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
-    .train-ticket-seat span {
+    .lookup-section-head {
       display: grid;
-      gap: 2px;
-      text-align: center;
+      gap: 8px;
+      margin-bottom: 10px;
     }
 
-    .train-ticket-seat b {
+    .lookup-section-head h3 {
+      margin: 0;
       color: #fff;
-      font-size: 22px;
+      font-size: 17px;
+      line-height: 1.2;
+    }
+
+    .status-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 22px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      color: #e9fff8;
+      background: rgba(122, 207, 174, .2);
+      border: 1px solid rgba(184, 255, 225, .24);
+      font-size: 11px;
+      font-weight: 900;
       line-height: 1;
-    }
-
-    .compact-train {
-      grid-template-columns: 1fr;
-      gap: 12px;
-      padding: 15px 16px;
-    }
-
-    .compact-train .train-ticket-head {
-      padding-bottom: 10px;
-    }
-
-    .compact-train .train-ticket-head b {
-      font-size: 13px;
-      letter-spacing: .04em;
-      color: rgba(255, 255, 255, .82);
       white-space: nowrap;
     }
 
-    .train-trip-list {
-      display: grid;
-      gap: 9px;
+    .status-pill.pending {
+      color: #fff1cf;
+      background: rgba(196, 155, 82, .18);
+      border-color: rgba(255, 222, 150, .28);
     }
 
-    .train-trip {
+    /* 高鐵時間軸（查詢結果內） */
+    .train-timeline {
+      position: relative;
       display: grid;
-      gap: 4px;
+      gap: 9px;
+      padding-left: 14px;
+    }
+
+    .train-timeline::before {
+      content: "";
+      position: absolute;
+      left: 5px;
+      top: 14px;
+      bottom: 51px;
+      width: 1px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, .55), rgba(255, 255, 255, .12));
+    }
+
+    .timeline-leg {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 5px;
       padding: 10px 11px;
       border-radius: 12px;
       background: rgba(255, 255, 255, .1);
-    }
-
-    .train-trip-main {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-      min-width: 0;
-    }
-
-    .train-trip-main span {
-      flex: 0 0 auto;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, .16);
-      color: rgba(255, 255, 255, .86);
-      font-size: 12px;
-      font-weight: 900;
-    }
-
-    .train-trip-main b {
-      flex: 0 0 auto;
-      color: #fff;
-      font-size: 17px;
-      letter-spacing: .06em;
-      line-height: 1;
-    }
-
-    .train-trip-main strong {
-      min-width: 0;
-      color: #fff;
-      font-size: 17px;
-      line-height: 1.18;
-    }
-
-    .train-trip small {
-      color: rgba(255, 255, 255, .74);
-      font-size: 12px;
-      font-weight: 850;
-      white-space: nowrap;
-    }
-
-    .train-seat-row {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .train-seat-row span {
-      display: grid;
-      gap: 3px;
-      padding: 10px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, .13);
-      color: rgba(255, 255, 255, .72);
-      font-size: 12px;
-      font-weight: 900;
-      text-align: center;
-    }
-
-    .train-seat-row b {
-      color: #fff;
-      font-size: 24px;
-      line-height: 1;
-    }
-
-    .train-info-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .train-info-cell {
-      min-width: 0;
-      display: grid;
-      gap: 5px;
-      padding: 11px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, .11);
       border: 1px solid rgba(255, 255, 255, .12);
     }
 
-    .train-info-cell span {
+    .timeline-dot {
+      position: absolute;
+      left: -14px;
+      top: 16px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(255, 255, 255, .13);
+    }
+
+    .timeline-leg.pending .timeline-dot {
+      background: var(--gold);
+    }
+
+    .timeline-leg-main {
+      display: grid;
+      gap: 3px;
+    }
+
+    .timeline-leg-main span {
       color: rgba(255, 255, 255, .7);
       font-size: 12px;
       font-weight: 900;
     }
 
-    .train-info-cell b {
+    .timeline-leg-main b {
       color: #fff;
-      font-size: 19px;
-      line-height: 1.1;
-      letter-spacing: .03em;
+      font-size: 16px;
+      line-height: 1.25;
     }
 
-    .train-info-cell small {
+    .timeline-leg-main small {
       color: rgba(255, 255, 255, .72);
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 850;
       line-height: 1.35;
     }
 
-    .train-info-cell.muted b,
-    .train-info-cell.muted small {
+    .train-seat-strip {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .train-seat-strip div {
+      display: grid;
+      gap: 2px;
+      padding: 9px 10px;
+      border-radius: 11px;
+      background: rgba(255, 255, 255, .13);
+      text-align: center;
+    }
+
+    .train-seat-strip span {
       color: rgba(255, 255, 255, .68);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .train-seat-strip b {
+      color: #fff;
+      font-size: 20px;
+      line-height: 1.1;
+    }
+
+    .train-seat-strip.pending b {
+      font-size: 15px;
+      color: rgba(255, 255, 255, .72);
+    }
+
+    .transport-subhead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 12px 0 8px;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(255, 255, 255, .18);
+    }
+
+    .transport-subhead span {
+      color: rgba(255, 255, 255, .78);
+      font-size: 13px;
+      font-weight: 950;
+    }
+
+    .transport-subhead b {
+      color: #fff;
+      font-size: 15px;
+      letter-spacing: .05em;
+      white-space: nowrap;
     }
 
     .bus-assignment {
@@ -1396,6 +1481,41 @@
       line-height: 1.2;
     }
 
+    .check-progress {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 253, 247, .9);
+    }
+
+    .check-progress span {
+      color: var(--jade);
+      font-size: 14px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .check-progress-bar {
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(20, 89, 78, .12);
+      overflow: hidden;
+    }
+
+    .check-progress-bar i {
+      display: block;
+      width: 0;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--jade), var(--lake));
+      transition: width .35s ease;
+    }
+
     .check-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1502,24 +1622,9 @@
 
 
 
-    @media (max-width: 390px) {
-      .topbar-inner { padding: 0 10px; gap: 5px; }
-      .header-brand { gap: 5px; }
-      .brand-mark { width: 40px; height: 40px; }
-      .brand-title { font-size: 27px; letter-spacing: .02em; }
-      .brand-divider { height: 28px; margin-left: 0; margin-right: 0; }
-      .brand-event b { font-size: 18px; }
-      .brand-event small { font-size: 8px; letter-spacing: .13em; }
-      .prep-button { padding: 0 10px; font-size: 12px; }
-    }
-
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .reveal { transition: none; }
-    }
-
-    body {
-      background: #0d1718;
     }
 
     .topbar {
@@ -1571,20 +1676,6 @@
     }
 
 
-    @media (max-width: 390px) {
-      .topbar-inner { padding: 0 10px; gap: 7px; }
-      .header-brand { gap: 6px; }
-      .brand-mark { width: 39px; height: 39px; }
-      .brand-title { font-size: 24px; letter-spacing: .025em; transform: translateY(1px) scaleX(1.01); }
-      .brand-divider { height: 27px; margin-left: 1px; margin-right: 1px; }
-      .brand-event b { font-size: 17.5px; }
-      .brand-event small { font-size: 8px; letter-spacing: .13em; }
-      .prep-button { height: 32px; min-height: 32px; padding: 0 11px; font-size: 12px; }
-      .train-ticket { grid-template-columns: 1fr; }
-      .train-ticket-seat { padding: 10px 0 0; border-top: 1px solid rgba(255, 255, 255, .2); border-left: 0; justify-content: flex-start; }
-      .bus-assignment { grid-template-columns: auto auto; }
-      .bus-assignment small { grid-column: 1 / -1; text-align: left; }
-    }
 
     .hero {
       min-height: clamp(560px, calc(100svh - 220px), 650px);
@@ -1746,15 +1837,22 @@
 
 
 
+    /* ≤390px 窄機型：整併後的唯一 topbar / 查詢卡調整 */
     @media (max-width: 390px) {
       .topbar-inner { padding: 0 10px; gap: 5px; }
       .header-brand { gap: 5px; }
       .brand-mark { width: 40px; height: 40px; }
-      .brand-title { font-size: 27px; letter-spacing: .02em; }
+      .brand-title { font-size: 27px; letter-spacing: .02em; transform: translateY(1px) scaleX(1.01); }
       .brand-divider { height: 28px; margin-left: 0; margin-right: 0; }
       .brand-event b { font-size: 18px; }
       .brand-event small { font-size: 8px; letter-spacing: .13em; }
-      .prep-button { padding: 0 10px; font-size: 12px; }
+      .prep-button { height: 32px; min-height: 32px; padding: 0 10px; font-size: 12px; }
+      .lookup-section { padding: 11px; }
+      .train-seat-strip { grid-template-columns: 1fr; }
+      .timeline-leg-main b { font-size: 15px; }
+      .timeline-leg-main small { font-size: 11px; }
+      .bus-assignment { grid-template-columns: auto auto; }
+      .bus-assignment small { grid-column: 1 / -1; text-align: left; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1767,5 +1865,17 @@
 
       .featured-course-row.featured-focus {
         transform: none;
+      }
+
+      .course-rows-wrap,
+      .course-rows,
+      .check-progress-bar i,
+      .day-jump button {
+        transition: none;
+      }
+
+      .result-card.result-updated,
+      .lookup-section {
+        animation: none;
       }
     }

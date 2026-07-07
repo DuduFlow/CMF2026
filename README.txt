@@ -5,6 +5,7 @@
 
 檔案結構：
 - index.html：頁面內容
+- sw.js：Service Worker，離線快取（部署到 GitHub Pages 後自動生效，改版時把 VERSION +1）
 - assets/css/styles.css：版面與手機 app 介面樣式
 - assets/js/app.js：分頁、搜尋、篩選、房間查詢
 - assets/js/train-data.js：由 Excel 匯入的 G1074 車廂與座位資料，並包含回程 G5597 高鐵班次

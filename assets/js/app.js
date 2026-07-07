@@ -33,6 +33,7 @@
 
     const days = [
       { id: "d1", no: "DAY 1", date: "2026.07.14（二）", key: "2026-07-14", title: "台北 → 青島", tone: "抵達青島，入住飯店。", img: image.d1, tags: ["move"], items: [
+        ["13:30", "桃園機場第二航廈集合", "山東航空 SC4086 團體櫃檯集合，統一辦理報到與托運。"],
         ["16:45-19:15", "山東航空 SC4086 台北 → 青島", "桃園 T2 出發，抵達青島膠東機場。"],
         ["傍晚", "接駁入住青島金水皇冠假日飯店", "專車接駁。"],
         ["晚餐", "晚餐自理", "飯店附近用餐。"]
@@ -326,7 +327,13 @@
       return `https://uri.amap.com/search?keyword=${encodeURIComponent(query)}`;
     }
 
+    function todayKey() {
+      const now = new Date();
+      return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+    }
+
     function updateCountdown() {
+      if (document.hidden) return;
       const now = new Date();
       const dayMs = 86400000;
       const toDeparture = departureTime - now;
@@ -353,6 +360,7 @@
     }
 
     function renderDays() {
+      const today = todayKey();
       $("#dayList").innerHTML = days.map((day) => {
         const search = normalized([day.no, day.date, day.title, day.tone, ...day.tags, ...day.items.flat()].join(" "));
         const items = day.items.map(([time, title, desc]) => `
@@ -362,11 +370,12 @@
           </div>
         `).join("");
         const tagText = day.tags.includes("course") ? "課程日" : day.tags.includes("move") ? "移動日" : "城市日";
+        const isToday = day.key === today;
         return `
-          <article class="day-card reveal" data-tags="${esc(day.tags.join(" "))}" data-search="${esc(search)}">
+          <article class="day-card reveal" data-day="${esc(day.id)}" data-tags="${esc(day.tags.join(" "))}" data-search="${esc(search)}">
             <div class="day-media">
               <img src="${esc(day.img)}" alt="${esc(day.title)}" width="1200" height="700" loading="lazy" decoding="async">
-              <div class="day-stamp"><b>${esc(day.no)} · ${esc(day.date)}</b><span>${esc(tagText)}</span></div>
+              <div class="day-stamp"><b>${esc(day.no)} · ${esc(day.date)}</b><span>${esc(tagText)}${isToday ? '<i class="today-flag">今天</i>' : ""}</span></div>
             </div>
             <div class="day-body">
               <div class="day-title-row">
@@ -378,6 +387,27 @@
           </article>
         `;
       }).join("");
+    }
+
+    function scrollToDayCard(dayId) {
+      const card = document.querySelector(`.day-card[data-day="${dayId}"]`);
+      if (!card) return;
+      const top = window.scrollY + card.getBoundingClientRect().top - 130;
+      window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+      card.classList.add("day-focus");
+      clearTimeout(scrollToDayCard.timer);
+      scrollToDayCard.timer = setTimeout(() => card.classList.remove("day-focus"), 1600);
+    }
+
+    function renderDayJump() {
+      const today = todayKey();
+      $("#dayJump").innerHTML = days.map((day) => {
+        const isToday = day.key === today;
+        return `<button type="button" data-day="${esc(day.id)}"${isToday ? ' class="today"' : ""}>${esc(day.no.replace("DAY ", "D"))}<span>${esc(day.date.slice(5, 10))}</span></button>`;
+      }).join("");
+      $$("#dayJump button").forEach((button) => {
+        button.addEventListener("click", () => scrollToDayCard(button.dataset.day));
+      });
     }
 
     function filterDays() {
@@ -418,17 +448,16 @@
             <button class="course-head" type="button" aria-expanded="${open ? "true" : "false"}">
               <span>${esc(day.title)}${featuredDay ? '<em class="course-head-badge">本團主角</em>' : ""}</span><span>${open ? "收合" : "展開"}</span>
             </button>
-            <div class="course-rows" ${open ? "" : 'style="display:none"'}>${rows}</div>
+            <div class="course-rows-wrap${open ? " open" : ""}"><div class="course-rows">${rows}</div></div>
           </article>
         `;
       }).join("");
       $$(".course-head").forEach((button) => {
         button.addEventListener("click", () => {
-          const rows = button.nextElementSibling;
-          const open = rows.style.display !== "none";
-          rows.style.display = open ? "none" : "block";
-          button.setAttribute("aria-expanded", String(!open));
-          button.lastElementChild.textContent = open ? "展開" : "收合";
+          const wrap = button.nextElementSibling;
+          const open = wrap.classList.toggle("open");
+          button.setAttribute("aria-expanded", String(open));
+          button.lastElementChild.textContent = open ? "收合" : "展開";
         });
       });
     }
@@ -450,7 +479,7 @@
         if (show) visible += 1;
         if (query) {
           const head = day.querySelector(".course-head");
-          day.querySelector(".course-rows").style.display = "block";
+          day.querySelector(".course-rows-wrap").classList.add("open");
           head.setAttribute("aria-expanded", "true");
           head.lastElementChild.textContent = "收合";
         }
@@ -464,19 +493,20 @@
       if (!featured) return;
       const day = featured.closest(".course-day");
       const head = day?.querySelector(".course-head");
-      const rows = day?.querySelector(".course-rows");
-      if (head && rows) {
-        rows.style.display = "block";
+      const wrap = day?.querySelector(".course-rows-wrap");
+      const wasOpen = wrap?.classList.contains("open");
+      if (head && wrap) {
+        wrap.classList.add("open");
         head.setAttribute("aria-expanded", "true");
         head.lastElementChild.textContent = "收合";
       }
-      requestAnimationFrame(() => {
+      setTimeout(() => {
         const top = window.scrollY + featured.getBoundingClientRect().top - 170;
         window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
         featured.classList.add("featured-focus");
         clearTimeout(focusFeaturedCourse.timer);
         focusFeaturedCourse.timer = setTimeout(() => featured.classList.remove("featured-focus"), 1800);
-      });
+      }, wasOpen ? 30 : 330);
     }
 
     function renderPlaces() {
@@ -543,6 +573,13 @@
       $("#placeEmpty").hidden = visible > 0;
     }
 
+    function updateCheckProgress() {
+      const inputs = $$("#checkList input");
+      const done = inputs.filter((input) => input.checked).length;
+      $("#checkProgressText").textContent = `已完成 ${done}/${inputs.length}`;
+      $("#checkProgressFill").style.width = inputs.length ? `${Math.round((done / inputs.length) * 100)}%` : "0%";
+    }
+
     function renderChecklist() {
       $("#checkList").innerHTML = checklist.map(([title, desc], index) => `
         <label class="check-item">
@@ -558,8 +595,10 @@
           try {
             localStorage.setItem(input.dataset.key, input.checked ? "1" : "0");
           } catch (error) {}
+          updateCheckProgress();
         });
       });
+      updateCheckProgress();
     }
 
     function resolveRoomNo(personRoom, roomKey) {
@@ -568,8 +607,9 @@
       return match ? match[roomKey] : "";
     }
 
-    function renderRosterResult(person) {
+    function renderRosterResult(person, options = {}) {
       if (!person) {
+        $("#rosterResult").classList.remove("has-result", "result-updated");
         $("#rosterResult").innerHTML = `<div class="result-name">找不到資料</div><div>請確認姓名是否與名單一致，或只輸入其中一個字查詢。</div>`;
         return;
       }
@@ -583,6 +623,16 @@
       const courseSubText = personRoom.courseLeader
         ? `組長：${esc(personRoom.courseLeader)}`
         : (personRoom.courseExempt ? "處經理" : "");
+      const badge = (text, tone = "ok") => `<span class="status-pill ${esc(tone)}">${esc(text)}</span>`;
+      const section = (title, badges, body) => `
+        <section class="lookup-section">
+          <div class="lookup-section-head">
+            <h3>${esc(title)}</h3>
+            <div class="status-row">${badges.join("")}</div>
+          </div>
+          ${body}
+        </section>
+      `;
       const assignmentHtml = `
         <div class="assignment-grid">
           <div class="assignment-box">
@@ -601,31 +651,45 @@
         </div>
       `;
       const trainHtml = `
-        <div class="train-ticket compact-train">
-          <div class="train-ticket-head">
-            <span>高鐵車次</span>
-            <b>${esc(trainInfo.trainNo || "G1074")} / ${esc(returnTrain.trainNo || "G5597")}</b>
-          </div>
-          <div class="train-info-grid">
-            <div class="train-info-cell">
+        <div class="transport-subhead">
+          <span>高鐵車次</span>
+          <b>${esc(trainInfo.trainNo || "G1074")} / ${esc(returnTrain.trainNo || "G5597")}</b>
+        </div>
+        <div class="train-timeline">
+          <div class="timeline-leg confirmed">
+            <span class="timeline-dot"></span>
+            <div class="timeline-leg-main">
               <span>去程</span>
-              <b>${esc(trainInfo.trainNo || "G1074")}</b>
-              <small>${esc(trainInfo.route || "青島 → 濟南")}｜${esc(trainInfo.time || "14:36–17:20")}</small>
+              <b>${esc(trainInfo.trainNo || "G1074")}｜${esc(trainInfo.route || "青島 → 濟南")}</b>
+              <small>${esc(trainInfo.date || "7/15")}　${esc(trainInfo.time || "14:36–17:20")}</small>
             </div>
-            <div class="train-info-cell">
+          </div>
+          <div class="train-seat-strip">
+            <div>
               <span>去程車廂</span>
-              <b>${esc(trainSeat.car || "待補")} 車廂</b>
-              <small>座位 ${esc(trainSeat.seat || "待補")}</small>
+              <b>${esc(trainSeat.car || "待補")}</b>
             </div>
-            <div class="train-info-cell">
+            <div>
+              <span>去程座位</span>
+              <b>${esc(trainSeat.seat || "待補")}</b>
+            </div>
+          </div>
+          <div class="timeline-leg pending">
+            <span class="timeline-dot"></span>
+            <div class="timeline-leg-main">
               <span>回程</span>
-              <b>${esc(returnTrain.trainNo || "G5597")}</b>
-              <small>${esc(returnTrain.route || "濟南 → 青島機場")}｜${esc(returnTrain.time || "08:37–10:38")}</small>
+              <b>${esc(returnTrain.trainNo || "G5597")}｜${esc(returnTrain.route || "濟南 → 青島機場")}</b>
+              <small>${esc(returnTrain.date || "7/21")}　${esc(returnTrain.time || "08:37–10:38")}</small>
             </div>
-            <div class="train-info-cell muted">
+          </div>
+          <div class="train-seat-strip pending">
+            <div>
               <span>回程車廂</span>
               <b>後續更新</b>
-              <small>座位買票後補上</small>
+            </div>
+            <div>
+              <span>回程座位</span>
+              <b>後續更新</b>
             </div>
           </div>
         </div>
@@ -661,14 +725,28 @@
           </div>
         `;
       }).join("");
-      $("#rosterResult").innerHTML = `
+      const result = $("#rosterResult");
+      result.classList.add("has-result");
+      result.innerHTML = `
         <div class="result-name">${esc(personName)}</div>
         <div class="result-unit">${esc(person[2])}</div>
-        ${busHtml}
-        ${trainHtml}
-        ${stayHtml}
-        ${assignmentHtml}
+        <div class="lookup-sections">
+          ${section("交通資訊", [badge("遊覽車已確認"), badge("去程高鐵已確認"), badge("回程座位待更新", "pending")], `${busHtml}${trainHtml}`)}
+          ${section("住宿資訊", [badge("住宿已列"), badge("房號待補", "pending")], stayHtml)}
+          ${section("活動資訊", [badge("桌次已確認"), badge("課程分組已列")], assignmentHtml)}
+        </div>
       `;
+      result.classList.remove("result-updated");
+      void result.offsetWidth;
+      result.classList.add("result-updated");
+      result.querySelectorAll(".lookup-section").forEach((node, index) => {
+        node.style.setProperty("--section-delay", `${index * 70}ms`);
+      });
+      if (options.scroll) {
+        requestAnimationFrame(() => {
+          result.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
     }
 
     function updateRoster() {
@@ -679,12 +757,13 @@
         button.addEventListener("click", () => {
           $("#nameSearch").value = button.dataset.name;
           $("#suggestions").innerHTML = "";
-          renderRosterResult(roster.find((person) => person[1] === button.dataset.name));
+          renderRosterResult(roster.find((person) => person[1] === button.dataset.name), { scroll: true });
         });
       });
       const exact = roster.find((person) => person[1] === query);
-      if (exact) renderRosterResult(exact);
+      if (exact) renderRosterResult(exact, { scroll: true });
       if (!query) {
+        $("#rosterResult").classList.remove("has-result", "result-updated");
         $("#rosterResult").innerHTML = `<div class="result-name">尚未查詢</div><div>輸入姓名查車次、遊覽車次、桌次與住宿。</div>`;
       }
     }
@@ -695,7 +774,6 @@
           $$(containerId + " button").forEach((item) => item.classList.remove("active"));
           button.classList.add("active");
           callback();
-          animateActivePage();
         });
       });
     }
@@ -732,8 +810,14 @@
       });
     }
 
+    const pageScroll = {};
+    let itineraryAutoScrolled = false;
+
     function setActivePage(page, updateHash = true) {
       const active = pageForHash("#" + page);
+      const prevNode = document.querySelector(".app-page.active[id]") || document.querySelector(".app-page.active");
+      const prev = prevNode ? prevNode.dataset.page : null;
+      if (prev && prev !== active) pageScroll[prev] = window.scrollY;
       $$("[data-page]").forEach((node) => node.classList.toggle("active", node.dataset.page === active));
       $$("#bottomTabs .app-tab").forEach((button) => {
         const selected = button.dataset.tab === active;
@@ -742,13 +826,26 @@
       });
       updateTopbar(active);
       animateActivePage();
-      window.scrollTo({ top: 0, behavior: "auto" });
+      window.scrollTo({ top: prev === active ? window.scrollY : (pageScroll[active] || 0), behavior: "auto" });
       if (updateHash && location.hash !== "#" + active) history.replaceState(null, "", "#" + active);
+      if (active === "itinerary" && !itineraryAutoScrolled) {
+        itineraryAutoScrolled = true;
+        const match = days.find((day) => day.key === todayKey());
+        if (match && !pageScroll[active]) setTimeout(() => scrollToDayCard(match.id), 320);
+      }
     }
 
     function setupTabs() {
-      $$("#bottomTabs .app-tab").forEach((button) => {
+      const tabs = $$("#bottomTabs .app-tab");
+      tabs.forEach((button, index) => {
         button.addEventListener("click", () => setActivePage(button.dataset.tab));
+        button.addEventListener("keydown", (event) => {
+          if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+          event.preventDefault();
+          const next = tabs[(index + (event.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length];
+          next.focus();
+          setActivePage(next.dataset.tab);
+        });
       });
       $("#prepShortcut").addEventListener("click", () => setActivePage("prep"));
       $("#featuredCourseJump").addEventListener("click", focusFeaturedCourse);
@@ -766,7 +863,11 @@
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) updateCountdown();
+    });
     renderDays();
+    renderDayJump();
     renderCourses();
     renderPlaces();
     renderHotels();
@@ -778,7 +879,21 @@
     $("#daySearch").addEventListener("input", filterDays);
     $("#courseSearch").addEventListener("input", filterCourses);
     $("#placeSearch").addEventListener("input", filterPlaces);
-    $("#nameSearch").addEventListener("input", updateRoster);
+
+    // 中文輸入法組字期間不觸發查詢，避免注音/拼音過程閃爍
+    let nameComposing = false;
+    const nameSearchInput = $("#nameSearch");
+    nameSearchInput.addEventListener("compositionstart", () => { nameComposing = true; });
+    nameSearchInput.addEventListener("compositionend", () => { nameComposing = false; updateRoster(); });
+    nameSearchInput.addEventListener("input", () => { if (!nameComposing) updateRoster(); });
+
     bindSegmented("#dayFilters", filterDays);
     bindSegmented("#courseFilters", filterCourses);
     bindSegmented("#placeFilters", filterPlaces);
+
+    // 離線快取：GitHub Pages / 靜態主機上自動啟用
+    if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js").catch(() => {});
+      });
+    }
