@@ -618,6 +618,8 @@
       const trainInfo = window.CMF_TRAIN_INFO || {};
       const returnTrain = trainInfo.return || {};
       const trainSeat = (window.CMF_TRAIN_ASSIGNMENTS || {})[personName] || {};
+      const returnTrainSeat = (window.CMF_RETURN_TRAIN_ASSIGNMENTS || {})[personName] || {};
+      const hasReturnTrainSeat = Boolean(returnTrainSeat.car && returnTrainSeat.seat);
       const latestAssignment = (window.CMF_LATEST_ASSIGNMENTS || {})[personName] || {};
       const courseMainText = personRoom.courseGroup || (personRoom.courseExempt ? "免分組" : "待補");
       const courseSubText = personRoom.courseLeader
@@ -674,7 +676,7 @@
               <b>${esc(trainSeat.seat || "待補")}</b>
             </div>
           </div>
-          <div class="timeline-leg pending">
+          <div class="timeline-leg ${hasReturnTrainSeat ? "confirmed" : "pending"}">
             <span class="timeline-dot"></span>
             <div class="timeline-leg-main">
               <span>回程</span>
@@ -682,14 +684,14 @@
               <small>${esc(returnTrain.date || "7/21")}　${esc(returnTrain.time || "08:37–10:38")}</small>
             </div>
           </div>
-          <div class="train-seat-strip pending">
+          <div class="train-seat-strip ${hasReturnTrainSeat ? "" : "pending"}">
             <div>
               <span>回程車廂</span>
-              <b>後續更新</b>
+              <b>${esc(returnTrainSeat.car || "後續更新")}</b>
             </div>
             <div>
               <span>回程座位</span>
-              <b>後續更新</b>
+              <b>${esc(returnTrainSeat.seat || "後續更新")}</b>
             </div>
           </div>
         </div>
@@ -731,7 +733,7 @@
         <div class="result-name">${esc(personName)}</div>
         <div class="result-unit">${esc(person[2])}</div>
         <div class="lookup-sections">
-          ${section("交通資訊", [badge("遊覽車已確認"), badge("去程高鐵已確認"), badge("回程座位待更新", "pending")], `${busHtml}${trainHtml}`)}
+          ${section("交通資訊", [badge("遊覽車已確認"), badge("去程高鐵已確認"), hasReturnTrainSeat ? badge("回程座位已確認") : badge("回程座位待更新", "pending")], `${busHtml}${trainHtml}`)}
           ${section("住宿資訊", [badge("住宿已列"), badge("房號待補", "pending")], stayHtml)}
           ${section("活動資訊", [badge("桌次已確認"), badge("課程分組已列")], assignmentHtml)}
         </div>

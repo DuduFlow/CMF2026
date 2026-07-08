@@ -1,4 +1,4 @@
-/* 字體改由 index.html 以非阻塞 <link> 載入（中國境內失敗時自動退回系統字體） */
+/* 中國大陸穩定版：不載入外部字體，全部使用系統字體 fallback。 */
 
 :root {
       --ink: #16201f;
@@ -415,6 +415,38 @@
       margin: 6px 0 0;
       color: var(--muted);
       font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .offline-card {
+      display: grid;
+      gap: 5px;
+      margin: 0 18px 18px;
+      padding: 12px;
+      border: 1px solid rgba(20, 89, 78, .14);
+      border-radius: var(--radius-sm);
+      background:
+        linear-gradient(135deg, rgba(237, 247, 244, .94), rgba(255, 253, 247, .86)),
+        #edf7f4;
+    }
+
+    .offline-card b {
+      color: var(--jade);
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .offline-card span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.55;
+    }
+
+    .offline-card small {
+      color: var(--terra);
+      font-size: 11px;
+      font-weight: 950;
       line-height: 1.45;
     }
 
