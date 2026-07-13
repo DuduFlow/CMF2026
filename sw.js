@@ -3,7 +3,7 @@
    HTML / CSS / JS：網路優先（有網路永遠拿最新版，離線才退回快取）
    圖片：快取優先（stale-while-revalidate，省流量）
    改版時把 VERSION +1，舊快取會自動清掉。 */
-const VERSION = "cmf2026-cn-v1-20260708";
+const VERSION = "cmf2026-cn-v4-20260713-excel-fix";
 const CORE = [
   "./",
   "index.html",
@@ -23,6 +23,9 @@ const CORE = [
   "mstile-150x150.png",
   "data/濟南房號_總表_吃飯桌次更新.xlsx",
   "data/濟南房號_總表_回程車位更新.xlsx",
+  "data/濟南房號_總表_桌次車次更新完整版.xlsx",
+  "data/濟南房號_總表_桌次車次更新完整版_質感排版.xlsx",
+  "data/濟南房號_總表_桌次車次更新完整版_分頁優化.xlsx",
   "assets/images/user-src/airport-travel.jpeg",
   "assets/images/user-src/android-chrome-192x192.png",
   "assets/images/user-src/android-chrome-512x512.png",
