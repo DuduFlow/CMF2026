@@ -179,8 +179,8 @@
       [33,"李奕寬","富吳通訊處"],[34,"黃彥融","富吳通訊處"],[35,"鄭丞哲","富吳通訊處"],[36,"謝宇軒","富吳通訊處"],
       [37,"戴孜安","富吳通訊處"],[38,"徐瀚","富吳通訊處"],[39,"許嘉晉","富則通訊處"],[40,"侯宏詣","富則通訊處"],
       [41,"簡宏鈞","富能通訊處"],[42,"王昱文","富則通訊處"],[43,"管卓鈞","富能通訊處"],[44,"林桂安","富則通訊處"],
-      [45,"簡姵萱","富能通訊處"],[46,"潘韻竹","富則通訊處"],[47,"傅佳旻","富占通訊處"],[48,"徐維鈴","富占通訊處"],
-      [49,"鍾怡婷","富占通訊處"],[50,"林宜潔","富占通訊處"],[51,"顏明儀","富則通訊處"],[52,"王思嵐","富則通訊處"],
+      [45,"簡姵萱","富能通訊處"],[46,"潘韻竹","富則通訊處"],[47,"顏明儀","富則通訊處"],[48,"王思嵐","富則通訊處"],
+      [49,"鍾怡婷","富占通訊處"],[50,"林宜潔","富占通訊處"],[51,"傅佳旻","富占通訊處"],[52,"徐維鈴","富占通訊處"],
       [53,"吳品萱","富則通訊處"],[54,"林芳誼","富則通訊處"],[55,"余妏珊","富則通訊處"],[56,"余若馨","富則通訊處"],
       [57,"吳沛錞","富則通訊處"],[58,"李婕詠","富則通訊處"],[59,"李孟珊","富則通訊處"],[60,"黃馨葦","富則通訊處"],
       [61,"蔡承遠","富則通訊處"],[62,"張國興","富則通訊處"],[63,"高智源","富則通訊處"],[64,"王銘宏","富則通訊處"],
@@ -197,10 +197,10 @@
       { key: "jinan", city: "濟南", hotel: "濟南美悅雲禧飯店" }
     ];
 
-    const singleRoomNames = new Set();
+    const singleRoomNames = new Set(["范毓斌", "邱仲恩", "吳修毅"]);
 
     const roomAssignments = {
-      // 由 data/濟南房號_總表_青島房號更新.xlsx 匯入；青島金水皇冠假日飯店房號 2026.07.14 更新，車次座位另由 train-data.js 同步。
+      // 由 data/濟南房號_總表_吃飯桌次更新.xlsx 匯入；車次座位另由 train-data.js 同步。
       "許智雄": {"group": "1", "single": false, "diningTable": "第1桌", "dinnerTable": "第9桌", "courseGroup": "第9組", "courseLeader": "許智雄", "courseExempt": false, "isCourseLeader": true, "qingdaoRoom": "920"},
       "謝政男": {"group": "1", "single": false, "diningTable": "第1桌", "dinnerTable": "第6桌", "courseGroup": "第6組", "courseLeader": "洪敬忠", "courseExempt": false, "isCourseLeader": false, "qingdaoRoom": "920"},
       "何宜家": {"group": "2", "single": false, "diningTable": "第1桌", "dinnerTable": "主桌", "courseGroup": "", "courseLeader": "", "courseExempt": true, "isCourseLeader": false, "qingdaoRoom": "707"},
@@ -247,12 +247,12 @@
       "林桂安": {"group": "22", "single": false, "diningTable": "第7桌", "dinnerTable": "第3桌", "courseGroup": "第3組", "courseLeader": "宋里安", "courseExempt": false, "isCourseLeader": false, "qingdaoRoom": "613"},
       "簡姵萱": {"group": "23", "single": false, "diningTable": "第5桌", "dinnerTable": "第7桌", "courseGroup": "第7組", "courseLeader": "陳昶聿", "courseExempt": false, "isCourseLeader": false, "qingdaoRoom": "618"},
       "潘韻竹": {"group": "23", "single": false, "diningTable": "第5桌", "dinnerTable": "第8桌", "courseGroup": "第8組", "courseLeader": "張祐珮", "courseExempt": false, "isCourseLeader": false, "qingdaoRoom": "618"},
-      "傅佳旻": {"group": "24", "single": false, "diningTable": "第3桌", "dinnerTable": "第8桌", "courseGroup": "第8組", "courseLeader": "張祐珮", "courseExempt": false, "isCourseLeader": false, "qingdaoRoom": "603"},
-      "徐維鈴": {"group": "24", "single": false, "diningTable": "第3桌", "dinnerTable": "第1桌", "courseGroup": "第1組", "courseLeader": "黃柏瑞", "courseExempt": false, "isCourseLeader": false, "qingdaoRoom": "603"},
+      "傅佳旻": {"group": "24", "single": false, "diningTable": "第3桌", "dinnerTable": "第8桌", "courseGroup": "第8組", "courseLeader": "張祐珮", "courseExempt": false, "isCourseLeader": false, "qingdaoRoom": "607"},
+      "徐維鈴": {"group": "24", "single": false, "diningTable": "第3桌", "dinnerTable": "第1桌", "courseGroup": "第1組", "courseLeader": "黃柏瑞", "courseExempt": false, "isCourseLeader": false, "qingdaoRoom": "607"},
       "鍾怡婷": {"group": "25", "single": false, "diningTable": "第3桌", "dinnerTable": "第6桌", "courseGroup": "第6組", "courseLeader": "洪敬忠", "courseExempt": false, "isCourseLeader": false, "qingdaoRoom": "1015"},
       "林宜潔": {"group": "25", "single": false, "diningTable": "第3桌", "dinnerTable": "第9桌", "courseGroup": "第9組", "courseLeader": "許智雄", "courseExempt": false, "isCourseLeader": false, "qingdaoRoom": "1015"},
-      "顏明儀": {"group": "26", "single": false, "diningTable": "第5桌", "dinnerTable": "第2桌", "courseGroup": "第2組", "courseLeader": "顏明儀", "courseExempt": false, "isCourseLeader": true, "qingdaoRoom": "607"},
-      "王思嵐": {"group": "26", "single": false, "diningTable": "第5桌", "dinnerTable": "第8桌", "courseGroup": "第8組", "courseLeader": "張祐珮", "courseExempt": false, "isCourseLeader": false, "qingdaoRoom": "607"},
+      "顏明儀": {"group": "26", "single": false, "diningTable": "第5桌", "dinnerTable": "第2桌", "courseGroup": "第2組", "courseLeader": "顏明儀", "courseExempt": false, "isCourseLeader": true, "qingdaoRoom": "603"},
+      "王思嵐": {"group": "26", "single": false, "diningTable": "第5桌", "dinnerTable": "第8桌", "courseGroup": "第8組", "courseLeader": "張祐珮", "courseExempt": false, "isCourseLeader": false, "qingdaoRoom": "603"},
       "吳品萱": {"group": "27", "single": false, "diningTable": "第4桌", "dinnerTable": "第6桌", "courseGroup": "第6組", "courseLeader": "洪敬忠", "courseExempt": false, "isCourseLeader": false, "qingdaoRoom": "907"},
       "林芳誼": {"group": "27", "single": false, "diningTable": "第7桌", "dinnerTable": "第5桌", "courseGroup": "第5組", "courseLeader": "李孟珊", "courseExempt": false, "isCourseLeader": false, "qingdaoRoom": "907"},
       "余妏珊": {"group": "28", "single": false, "diningTable": "第4桌", "dinnerTable": "第1桌", "courseGroup": "第1組", "courseLeader": "黃柏瑞", "courseExempt": false, "isCourseLeader": false, "qingdaoRoom": "703"},
@@ -734,7 +734,7 @@
         <div class="result-unit">${esc(person[2])}</div>
         <div class="lookup-sections">
           ${section("交通資訊", [badge("遊覽車已確認"), badge("去程高鐵已確認"), hasReturnTrainSeat ? badge("回程座位已確認") : badge("回程座位待更新", "pending")], `${busHtml}${trainHtml}`)}
-          ${section("住宿資訊", [badge("青島房號已確認"), badge("濟南房號待補", "pending")], stayHtml)}
+          ${section("住宿資訊", [badge("住宿已列"), badge("房號待補", "pending")], stayHtml)}
           ${section("活動資訊", [badge("桌次已確認"), badge("課程分組已列")], assignmentHtml)}
         </div>
       `;
