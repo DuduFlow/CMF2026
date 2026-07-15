@@ -3,7 +3,7 @@
    HTML / CSS / JS：網路優先（有網路永遠拿最新版，離線才退回快取）
    圖片：快取優先（stale-while-revalidate，省流量）
    改版時把 VERSION +1，舊快取會自動清掉。 */
-const VERSION = "cmf2026-cn-v7-20260714-number-fix";
+const VERSION = "cmf2026-cn-v8-20260715-jinan-room";
 const CORE = [
   "./",
   "index.html",
@@ -29,6 +29,7 @@ const CORE = [
   "data/濟南房號_總表_桌次車次房號更新完整版.xlsx",
   "data/濟南房號_總表_桌次車次房號更新完整版_姓名校正版.xlsx",
   "data/濟南房號_總表_桌次車次房號更新完整版_編號校正版.xlsx",
+  "data/濟南房號_總表_桌次車次房號更新完整版_濟南房號版.xlsx",
   "assets/images/user-src/airport-travel.jpeg",
   "assets/images/user-src/android-chrome-192x192.png",
   "assets/images/user-src/android-chrome-512x512.png",
