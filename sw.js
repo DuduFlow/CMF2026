@@ -1,15 +1,16 @@
 /* CMF 2026 精簡上傳版離線快取
    只快取本版網頁實際需要的檔案，避免弱網路上傳/安裝失敗。 */
-const VERSION = "cmf2026-cn-v20-20260718-note4";
+const VERSION = "cmf2026-cn-v21-20260718-note5";
 const CORE = [
   "./",
   "index.html",
   "learning-notes.html",
-  "learning-notes.html?v=20260718-9",
+  "learning-notes.html?v=20260718-10",
   "notes/d5-01-baishidai-yinye.html",
   "notes/d5-02-zhangyifan.html",
   "notes/d5-03-chudongdong.html",
   "notes/d5-04-yuqiaoqin.html",
+  "notes/d5-05-guoxu.html",
   "assets/css/styles.css",
   "assets/js/app.js",
   "assets/js/train-data.js",
