@@ -444,7 +444,7 @@
 <body>
   <main class="app">
     <header class="topbar">
-      <a class="header-brand" href="learning-notes.html" aria-label="回到學習筆記頁首">
+      <a class="header-brand" href="learning-notes.html?v=20260718-2" aria-label="回到學習筆記頁首">
         <img class="brand-mark" src="assets/images/user-src/logo-cmf-official.png" alt="" width="512" height="512">
         <span class="brand-title">逐浪泉城</span>
         <span class="brand-divider" aria-hidden="true"></span>
@@ -670,5 +670,16 @@
 
     <div class="footer-space"></div>
   </main>
+  <script>
+    (() => {
+      const currentVersion = "20260718-2";
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("v") !== currentVersion) {
+        params.set("v", currentVersion);
+        const next = `${window.location.pathname}?${params.toString()}${window.location.hash}`;
+        window.location.replace(next);
+      }
+    })();
+  </script>
 </body>
 </html>
