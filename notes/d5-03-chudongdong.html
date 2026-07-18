@@ -313,6 +313,38 @@
       line-height: 1.65;
     }
 
+    .diagram-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .diagram-card {
+      overflow: hidden;
+      margin: 0;
+      border: 1px solid rgba(17, 88, 79, .12);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .74);
+      box-shadow: 0 12px 28px rgba(23, 33, 31, .08);
+    }
+
+    .diagram-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #fff;
+    }
+
+    .diagram-card figcaption {
+      margin: 0;
+      padding: 12px 14px;
+      color: var(--muted);
+      background: rgba(255, 253, 247, .94);
+      font-size: 13px;
+      font-weight: 850;
+      line-height: 1.6;
+    }
+
     .model {
       margin-top: 12px;
     }
@@ -433,30 +465,6 @@
       line-height: 1.55;
     }
 
-    .photo-card {
-      overflow: hidden;
-      margin: 0 0 12px;
-      border: 1px solid rgba(23, 33, 31, .1);
-      border-radius: 20px;
-      background: #fff;
-      box-shadow: 0 12px 26px rgba(23, 33, 31, .08);
-    }
-
-    .photo-card img {
-      display: block;
-      width: 100%;
-      height: auto;
-      background: #f2f2f2;
-    }
-
-    .photo-card figcaption {
-      margin: 0;
-      padding: 12px 14px 14px;
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 800;
-    }
-
     .pill-list {
       display: flex;
       flex-wrap: wrap;
@@ -555,11 +563,11 @@
 <body>
   <main class="shell">
     <header class="topbar">
-      <a class="brand" href="../learning-notes.html?v=20260718-5" aria-label="返回學習筆記">
+      <a class="brand back-to-notes" href="../learning-notes.html?v=20260718-9" aria-label="返回學習筆記">
         <span>CMF DAY 1</span>
         <b>壽險常青樹</b>
       </a>
-      <a class="mode-chip" href="../learning-notes.html?v=20260718-5">返回筆記</a>
+      <a class="mode-chip back-to-notes" href="../learning-notes.html?v=20260718-9">返回筆記</a>
     </header>
 
     <section class="hero">
@@ -578,7 +586,7 @@
       <a href="#review">3分鐘複習</a>
       <a href="#model">經營模型</a>
       <a href="#stories">故事案例</a>
-      <a href="#slides">投影片</a>
+      <a href="#slides">消化重點</a>
       <a href="#quotes">金句</a>
       <a href="#discussion">討論</a>
       <a href="#actions">行動</a>
@@ -640,23 +648,24 @@
 
     <section class="section" id="slides">
       <article class="card">
-        <div class="section-head"><span class="num">04</span><h2>投影片重點</h2></div>
-        <figure class="photo-card">
-          <img src="../assets/images/notes/d5-03/personal-quotes.jpg" alt="褚東東個人語錄投影片" loading="lazy">
-          <figcaption>個人語錄：目標是用來超越的；小單打天下、件數定江山；成交是客戶，不成交是朋友。</figcaption>
-        </figure>
-        <figure class="photo-card">
-          <img src="../assets/images/notes/d5-03/customer-sources.jpg" alt="客戶來源六大客群投影片" loading="lazy">
-          <figcaption>客戶來源：開門紅、健康險、車險、短險、團險、銀保客戶，都是長期經營的入口。</figcaption>
-        </figure>
-        <figure class="photo-card">
-          <img src="../assets/images/notes/d5-03/sales-flow.jpg" alt="我的銷售流程投影片" loading="lazy">
-          <figcaption>銷售流程：從陌生人到朋友、家人、客戶，再形成忠誠客戶與客戶網，最後走向永續經營。</figcaption>
-        </figure>
-        <figure class="photo-card">
-          <img src="../assets/images/notes/d5-03/meaning.jpg" alt="保險的意義投影片" loading="lazy">
-          <figcaption>保險的意義：在順境時留風險準備，在困境時留重新再來的路；低利率時代更要重視穩健增值與安全傳承。</figcaption>
-        </figure>
+        <div class="section-head"><span class="num">04</span><h2>照片消化後的重點</h2></div>
+        <p class="lead">投影片的價值不在畫面本身，而在它背後提醒我們的經營邏輯：目標、客源、流程與保險意義，要被整理成自己能說、能用、能帶回團隊討論的語言。</p>
+        <div class="insight-grid" style="margin-top:12px;">
+          <div class="insight"><span>個人語錄</span><b>目標不是拿來展示，是拿來超越。</b><p>褚東東老師把「小單打天下、件數定江山」講得很直白：先讓自己持續簽單、持續服務，快樂與信心才會累積，最後才有做大的可能。</p></div>
+          <div class="insight"><span>客戶來源</span><b>客戶不是只有高淨值一種入口。</b><p>開門紅、健康險、車險、短險、團險、銀保客戶，都能變成關係的起點。真正的高手不是只找大客戶，而是能把不同來源經營成長期客戶網。</p></div>
+          <div class="insight"><span>銷售流程</span><b>從陌生人到信任，再到永續經營。</b><p>他的流程不是一次成交，而是建立關係、加深連結、發掘需求、提供方案、持續關懷，最後形成忠誠客戶、客戶網與客戶團隊。</p></div>
+          <div class="insight"><span>保險意義</span><b>順境留風險準備，逆境留重新再來的路。</b><p>保險不只是資產配置工具，更是家庭在低利率、長壽與不確定時代裡，保有穩健增值、安全傳承與重新站起來能力的方法。</p></div>
+        </div>
+        <div class="diagram-grid" aria-label="整理圖解">
+          <figure class="diagram-card">
+            <img src="../assets/images/notes/d5-03/customer-sources.jpg" alt="客戶來源整理圖：六大客群與長期經營入口" loading="lazy">
+            <figcaption>客戶來源：開門紅、健康險、車險、短險、團險、銀保客戶，都可以成為長期經營的入口。</figcaption>
+          </figure>
+          <figure class="diagram-card">
+            <img src="../assets/images/notes/d5-03/sales-flow.jpg" alt="銷售流程整理圖：從陌生人到信任與永續經營" loading="lazy">
+            <figcaption>銷售流程：從陌生人到朋友、家人、客戶，再透過專業服務與持續關懷，形成忠誠客戶與客戶網。</figcaption>
+          </figure>
+        </div>
       </article>
     </section>
 
@@ -739,6 +748,14 @@
   </main>
 
   <script>
+    document.querySelectorAll(".back-to-notes").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        if (history.length <= 1) return;
+        event.preventDefault();
+        history.back();
+      });
+    });
+
     const key = "cmf-note-d5-03-actions";
     const saved = JSON.parse(localStorage.getItem(key) || "{}");
     document.querySelectorAll("[data-action]").forEach((box) => {

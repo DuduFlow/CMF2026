@@ -288,12 +288,39 @@
     }
 
     .day {
+      --day-main: var(--jade);
+      --day-second: #245f68;
+      --day-soft: rgba(237, 247, 244, .72);
+      --day-line: rgba(20, 89, 78, .1);
       margin-bottom: 18px;
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      background: rgba(255, 253, 247, .94);
+      background:
+        linear-gradient(90deg, var(--day-main) 0 7px, transparent 7px),
+        rgba(255, 253, 247, .94);
       box-shadow: 0 16px 42px rgba(23, 33, 31, .08);
       overflow: hidden;
+    }
+
+    .day-1 {
+      --day-main: #14594e;
+      --day-second: #28766e;
+      --day-soft: rgba(231, 247, 241, .82);
+      --day-line: rgba(20, 89, 78, .16);
+    }
+
+    .day-2 {
+      --day-main: #244f88;
+      --day-second: #6a4c93;
+      --day-soft: rgba(237, 243, 252, .86);
+      --day-line: rgba(36, 79, 136, .18);
+    }
+
+    .day-3 {
+      --day-main: #b95734;
+      --day-second: #c99b43;
+      --day-soft: rgba(252, 241, 225, .88);
+      --day-line: rgba(185, 87, 52, .18);
     }
 
     .day-head {
@@ -301,7 +328,7 @@
       color: #fff;
       background:
         radial-gradient(circle at 10% 10%, rgba(196, 155, 82, .32), transparent 30%),
-        linear-gradient(135deg, var(--jade), #245f68);
+        linear-gradient(135deg, var(--day-main), var(--day-second));
     }
 
     .day-head span {
@@ -328,9 +355,9 @@
 
     .session {
       padding: 14px;
-      border: 1px solid rgba(20, 89, 78, .1);
+      border: 1px solid var(--day-line);
       border-radius: var(--radius-sm);
-      background: rgba(237, 247, 244, .72);
+      background: var(--day-soft);
     }
 
     .session.break {
@@ -348,7 +375,7 @@
 
     .time {
       flex: 0 0 auto;
-      color: var(--terra);
+      color: var(--day-main);
       font-size: 13px;
       font-weight: 950;
       white-space: nowrap;
@@ -358,7 +385,7 @@
       flex: 0 0 auto;
       padding: 4px 8px;
       border-radius: 999px;
-      color: var(--jade);
+      color: var(--day-main);
       background: rgba(255, 255, 255, .78);
       font-size: 11px;
       font-weight: 950;
@@ -406,7 +433,7 @@
 
     .session.ready .status {
       color: #fff;
-      background: linear-gradient(135deg, var(--jade), var(--gold));
+      background: linear-gradient(135deg, var(--day-main), var(--day-second));
     }
 
     .note-open {
@@ -417,7 +444,7 @@
       padding: 9px 14px;
       border-radius: 999px;
       color: #fff;
-      background: linear-gradient(135deg, var(--jade), var(--gold));
+      background: linear-gradient(135deg, var(--day-main), var(--day-second));
       font-size: 14px;
       font-weight: 950;
       letter-spacing: .05em;
@@ -425,6 +452,25 @@
     }
 
     .note-open:active { transform: scale(.98); }
+
+    .session.return-focus {
+      animation: returnFocus 1.3s ease both;
+    }
+
+    @keyframes returnFocus {
+      0% {
+        box-shadow: 0 0 0 0 rgba(196, 155, 82, 0), 0 16px 36px rgba(20, 89, 78, .1);
+        transform: translateY(0);
+      }
+      22% {
+        box-shadow: 0 0 0 7px rgba(196, 155, 82, .24), 0 18px 44px rgba(20, 89, 78, .14);
+        transform: translateY(-2px);
+      }
+      100% {
+        box-shadow: 0 16px 36px rgba(20, 89, 78, .1);
+        transform: translateY(0);
+      }
+    }
 
     .featured {
       border-color: rgba(196, 155, 82, .42);
@@ -444,7 +490,7 @@
 <body>
   <main class="app">
     <header class="topbar">
-      <a class="header-brand" href="learning-notes.html?v=20260718-5" aria-label="回到學習筆記頁首">
+      <a class="header-brand" href="learning-notes.html?v=20260718-9" aria-label="回到學習筆記頁首">
         <img class="brand-mark" src="assets/images/user-src/logo-cmf-official.png" alt="" width="512" height="512">
         <span class="brand-title">逐浪泉城</span>
         <span class="brand-divider" aria-hidden="true"></span>
@@ -463,8 +509,8 @@
         <p>逐堂整理課程重點、講師金句、故事案例與小組討論題。</p>
         <div class="summary-row">
           <div><span>日期</span><b>7/18-7/20</b></div>
-          <div><span>課程</span><b>22 堂</b></div>
-          <div><span>狀態</span><b>3 堂完成</b></div>
+          <div><span>課程</span><b>18 堂</b></div>
+          <div><span>狀態</span><b>4 堂完成</b></div>
         </div>
       </div>
     </section>
@@ -476,7 +522,7 @@
     </nav>
 
     <div class="wrap">
-      <section class="day" id="day1">
+      <section class="day day-1" id="day1">
         <div class="day-head">
           <span>DAY 5 · 2026.07.18</span>
           <h2>開篇：探秘保險新生態</h2>
@@ -508,11 +554,11 @@
             <div class="session-head"><span class="time">15:10-15:30</span><span class="status">休息</span></div>
             <h3 class="topic">休息</h3>
           </article>
-          <article class="session" id="note-d5-04">
-            <div class="session-head"><span class="time">15:30-16:20</span><span class="status">筆記待補</span></div>
+          <article class="session ready" id="note-d5-04">
+            <div class="session-head"><span class="time">15:30-16:20</span><span class="status">已整理</span></div>
             <h3 class="topic">用家辦思維撬動超高淨值客戶</h3>
             <div class="speaker">余巧琴｜平安高質量轉型代言人、高客服務典範、精兵團隊標桿</div>
-            <div class="note-slot"><b>待整理</b></div>
+            <div class="note-slot"><a class="note-open" href="notes/d5-04-yuqiaoqin.html">閱讀筆記</a><b>家辦思維｜余巧琴，完整筆記已上線。</b></div>
           </article>
           <article class="session" id="note-d5-05">
             <div class="session-head"><span class="time">16:20-17:10</span><span class="status">筆記待補</span></div>
@@ -520,16 +566,10 @@
             <div class="speaker">國旭｜京師律所合夥人、家族財富管理法律專家</div>
             <div class="note-slot"><b>待整理</b></div>
           </article>
-          <article class="session" id="note-d5-06">
-            <div class="session-head"><span class="time">17:10-17:40</span><span class="status">筆記待補</span></div>
-            <h3 class="topic">從財富顧問，到康壽守護者</h3>
-            <div class="speaker">張朋｜保險高淨值客戶健康經營賦能導師</div>
-            <div class="note-slot"><b>待整理</b></div>
-          </article>
         </div>
       </section>
 
-      <section class="day" id="day2">
+      <section class="day day-2" id="day2">
         <div class="day-head">
           <span>DAY 6 · 2026.07.19</span>
           <h2>中篇：探求保險新生態之路</h2>
@@ -602,7 +642,7 @@
         </div>
       </section>
 
-      <section class="day" id="day3">
+      <section class="day day-3" id="day3">
         <div class="day-head">
           <span>DAY 7 · 2026.07.20</span>
           <h2>尾篇：探討保險新生態之策</h2>
@@ -646,28 +686,6 @@
             <div class="speaker">齊昊｜財務專家、實戰派 CFO、知名講師</div>
             <div class="note-slot"><b>待整理</b></div>
           </article>
-          <article class="session" id="note-d7-06">
-            <div class="session-head"><span class="time">14:10-15:10</span><span class="status">筆記待補</span></div>
-            <h3 class="topic">國學與保險營銷</h3>
-            <div class="speaker">趙玉平｜中央電視台《百家講壇》最具人氣主講人，中國十大國學專家、管理學博士</div>
-            <div class="note-slot"><b>待整理</b></div>
-          </article>
-          <article class="session break">
-            <div class="session-head"><span class="time">15:10-15:50</span><span class="status">休息</span></div>
-            <h3 class="topic">休息及節目</h3>
-          </article>
-          <article class="session" id="note-d7-07">
-            <div class="session-head"><span class="time">15:50-16:40</span><span class="status">筆記待補</span></div>
-            <h3 class="topic">守正創新——2026 資產配置的底層邏輯</h3>
-            <div class="speaker">林海川｜CMF 大會創始人之一、CMF 大會執行秘書長</div>
-            <div class="note-slot"><b>待整理</b></div>
-          </article>
-          <article class="session" id="note-d7-08">
-            <div class="session-head"><span class="time">16:40-17:10</span><span class="status">筆記待補</span></div>
-            <h3 class="topic">柔韌的力量：女性企業家的破局與成長</h3>
-            <div class="speaker">李巍｜新希望集團聯合創始人</div>
-            <div class="note-slot"><b>待整理</b></div>
-          </article>
         </div>
       </section>
     </div>
@@ -676,13 +694,44 @@
   </main>
   <script>
     (() => {
-      const currentVersion = "20260718-5";
+      const currentVersion = "20260718-9";
       const params = new URLSearchParams(window.location.search);
       if (params.get("v") !== currentVersion) {
         params.set("v", currentVersion);
         const next = `${window.location.pathname}?${params.toString()}${window.location.hash}`;
         window.location.replace(next);
       }
+
+      const rememberKey = "cmf-learning-note-return";
+
+      document.querySelectorAll(".note-open").forEach((link) => {
+        link.addEventListener("click", () => {
+          const card = link.closest(".session[id]");
+          if (!card) return;
+          sessionStorage.setItem(rememberKey, JSON.stringify({
+            id: card.id,
+            y: Math.max(0, Math.round(window.scrollY)),
+            at: Date.now()
+          }));
+        });
+      });
+
+      const restoreRaw = sessionStorage.getItem(rememberKey);
+      if (!restoreRaw) return;
+
+      let restore;
+      try { restore = JSON.parse(restoreRaw); } catch (_) { return; }
+      if (!restore || !restore.id || Date.now() - Number(restore.at || 0) > 1000 * 60 * 60 * 8) return;
+      sessionStorage.removeItem(rememberKey);
+
+      requestAnimationFrame(() => {
+        const target = document.getElementById(restore.id);
+        if (!target) return;
+        const top = window.scrollY + target.getBoundingClientRect().top - 110;
+        window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
+        target.classList.add("return-focus");
+        setTimeout(() => target.classList.remove("return-focus"), 1400);
+      });
     })();
   </script>
 </body>

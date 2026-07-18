@@ -1,14 +1,15 @@
 /* CMF 2026 精簡上傳版離線快取
    只快取本版網頁實際需要的檔案，避免弱網路上傳/安裝失敗。 */
-const VERSION = "cmf2026-cn-v16-20260718-note3-lite";
+const VERSION = "cmf2026-cn-v20-20260718-note4";
 const CORE = [
   "./",
   "index.html",
   "learning-notes.html",
-  "learning-notes.html?v=20260718-5",
+  "learning-notes.html?v=20260718-9",
   "notes/d5-01-baishidai-yinye.html",
   "notes/d5-02-zhangyifan.html",
   "notes/d5-03-chudongdong.html",
+  "notes/d5-04-yuqiaoqin.html",
   "assets/css/styles.css",
   "assets/js/app.js",
   "assets/js/train-data.js",
@@ -45,10 +46,13 @@ const CORE = [
   "assets/images/user-src/sight-wulongtan.jpeg",
   "assets/images/user-src/sight-furong-street.jpeg",
   "assets/images/user-src/sight-qushuiting.jpeg",
-  "assets/images/notes/d5-03/personal-quotes.jpg",
   "assets/images/notes/d5-03/customer-sources.jpg",
   "assets/images/notes/d5-03/sales-flow.jpg",
-  "assets/images/notes/d5-03/meaning.jpg"
+  "assets/images/notes/d5-04/client-system.jpg",
+  "assets/images/notes/d5-04/wealth-pyramid.jpg",
+  "assets/images/notes/d5-04/eight-risks.jpg",
+  "assets/images/notes/d5-04/service-dimensions.jpg",
+  "assets/images/notes/d5-04/talent-reasons.jpg"
 ];
 
 self.addEventListener("install", (event) => {

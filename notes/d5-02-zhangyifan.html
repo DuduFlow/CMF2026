@@ -532,7 +532,7 @@
         <b>商業的頂級玩法</b>
         <span>EVENT · MEDIA · TRUST</span>
       </div>
-      <a class="mode-chip" href="../learning-notes.html?v=20260718-5">返回筆記</a>
+      <a class="mode-chip back-to-notes" href="../learning-notes.html?v=20260718-9">返回筆記</a>
     </header>
 
     <section class="hero">
@@ -644,6 +644,14 @@
     <div class="footer-space"></div>
   </main>
   <script>
+    document.querySelectorAll(".back-to-notes").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        if (history.length <= 1) return;
+        event.preventDefault();
+        history.back();
+      });
+    });
+
     document.querySelectorAll(".actions input").forEach((input, index) => {
       const key = `cmf-day1-zhangyifan-action-${index}`;
       input.checked = localStorage.getItem(key) === "1";
