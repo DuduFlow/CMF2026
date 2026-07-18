@@ -3,10 +3,11 @@
    HTML / CSS / JS：網路優先（有網路永遠拿最新版，離線才退回快取）
    圖片：快取優先（stale-while-revalidate，省流量）
    改版時把 VERSION +1，舊快取會自動清掉。 */
-const VERSION = "cmf2026-cn-v8-20260715-jinan-room";
+const VERSION = "cmf2026-cn-v9-20260718-learning-notes";
 const CORE = [
   "./",
   "index.html",
+  "learning-notes.html",
   "assets/css/styles.css",
   "assets/js/app.js",
   "assets/js/train-data.js",

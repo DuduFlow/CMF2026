@@ -862,6 +862,38 @@
     }
 
     .course-row:first-child { border-top: 0; }
+
+    .course-time {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .course-note-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 28px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(20, 89, 78, .1);
+      color: var(--green);
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-decoration: none;
+      box-shadow: inset 0 0 0 1px rgba(20, 89, 78, .12);
+      transition: transform .18s ease, background .18s ease, color .18s ease;
+    }
+
+    .course-note-link:active {
+      transform: scale(.96);
+      background: var(--green);
+      color: #fff;
+    }
+
     .course-section-row {
       margin: 10px 0 4px;
       padding: 12px;
@@ -1710,6 +1742,7 @@
       .countdown b { font-size: 28px; }
       .segment { grid-template-columns: 82px minmax(0, 1fr); gap: 10px; }
       .course-row { grid-template-columns: 1fr; gap: 4px; }
+      .course-time { flex-direction: row; align-items: center; justify-content: space-between; }
       .check-grid { grid-template-columns: 1fr; }
       .data-card img { height: 210px; }
       h1 { font-size: clamp(42px, 14vw, 70px); }

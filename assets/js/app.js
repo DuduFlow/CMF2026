@@ -135,6 +135,31 @@
       ]}
     ];
 
+    const courseNoteLinks = new Map([
+      ["百歲時代：生命科學重構健康與財富的底層邏輯", "learning-notes.html#note-d5-01"],
+      ["時代趨勢：自媒體事件營銷", "learning-notes.html#note-d5-02"],
+      ["壽險常青樹 - 超高淨值客戶銷售解析", "learning-notes.html#note-d5-03"],
+      ["用家辦思維撬動超高淨值客戶", "learning-notes.html#note-d5-04"],
+      ["法商智慧：高客風險破解", "learning-notes.html#note-d5-05"],
+      ["認知突圍：業績倍增心法", "learning-notes.html#note-d6-01"],
+      ["長期主義：20 年保險路，從個人績優到團隊領袖", "learning-notes.html#note-d6-02"],
+      ["團隊經營與績優文化建設", "learning-notes.html#note-d6-03"],
+      ["00 後組織發展：年輕一代的團隊成長密碼", "learning-notes.html#note-d6-04"],
+      ["投保心理學：洞察人性，經營未來 - AI 保險時代下的破局", "learning-notes.html#note-d6-05"],
+      ["家族保單拓客要領", "learning-notes.html#note-d6-06"],
+      ["IP 打造與直播獲客", "learning-notes.html#note-d6-07"],
+      ["職業轉型與保險從業成長", "learning-notes.html#note-d6-08"],
+      ["企業家客戶的銷售邏輯", "learning-notes.html#note-d6-09"],
+      ["內容 IP 獲客：從晨間直播到百萬粉絲，保險人長效私域經營", "learning-notes.html#note-d7-01"],
+      ["人生經營三部曲 - 保險的智慧", "learning-notes.html#note-d7-02"],
+      ["持續打造績優與高客深度經營", "learning-notes.html#note-d7-03"],
+      ["如何構建保險新生態", "learning-notes.html#note-d7-04"],
+      ["財務視角下的保險本質", "learning-notes.html#note-d7-05"],
+      ["國學與保險營銷", "learning-notes.html#note-d7-06"],
+      ["構建保險新生態", "learning-notes.html#note-d7-07"],
+      ["柔韌的力量：女性企業家的破局與成長", "learning-notes.html#note-d7-08"]
+    ]);
+
     const places = [
       { type: "stay", img: image.hQingdao, name: "青島金水皇冠假日飯店", meta: "7/14-7/15 · 青島", addr: "中國山東省青島市李滄區巨峰路175-2號", desc: "第一晚住宿，近李滄商圈。" },
       { type: "stay", img: image.hJinan, name: "美悅雲禧飯店", meta: "7/15-7/21 · 濟南", addr: "山東省濟南市槐蔭區興福寺路2660號", desc: "CMF 期間住宿，近濟南西站與會展中心。" },
@@ -432,9 +457,13 @@
           const search = normalized(row.join(" "));
           const sectionRow = /專場|上午場|下午場/.test(row[0]);
           const featured = row.join("").includes("吳修毅");
+          const noteHref = courseNoteLinks.get(row[1]);
           return `
             <div class="course-row${sectionRow ? " course-section-row" : ""}${featured ? " featured-course-row" : ""}" data-search="${esc(search)}">
-              <div class="course-time">${esc(row[0])}</div>
+              <div class="course-time">
+                <span>${esc(row[0])}</span>
+                ${noteHref ? `<a class="course-note-link" href="${esc(noteHref)}">筆記</a>` : ""}
+              </div>
               <div>
                 ${featured ? '<div class="featured-note"><span class="featured-badge">本團主角</span><span>7/19 10:20｜吳修毅</span></div>' : ""}
                 <div class="course-topic">${esc(row[1])}</div>
@@ -797,7 +826,7 @@
     }
 
     function updateTopbar(active) {
-      $("#prepShortcut").classList.toggle("is-active", active === "prep");
+      $("#prepShortcut").classList.remove("is-active");
     }
 
     function animateActivePage() {
@@ -849,7 +878,7 @@
           setActivePage(next.dataset.tab);
         });
       });
-      $("#prepShortcut").addEventListener("click", () => setActivePage("prep"));
+      $("#prepShortcut").addEventListener("click", () => { window.location.href = "learning-notes.html"; });
       $("#featuredCourseJump").addEventListener("click", focusFeaturedCourse);
       document.addEventListener("click", (event) => {
         const link = event.target.closest('a[href^="#"]');
