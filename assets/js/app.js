@@ -136,7 +136,7 @@
     ];
 
     const courseNoteLinks = new Map([
-      ["百歲時代：生命科學重構健康與財富的底層邏輯", "learning-notes.html#note-d5-01"],
+      ["百歲時代：生命科學重構健康與財富的底層邏輯", "notes/d5-01-baishidai-yinye.html"],
       ["時代趨勢：自媒體事件營銷", "learning-notes.html#note-d5-02"],
       ["壽險常青樹 - 超高淨值客戶銷售解析", "learning-notes.html#note-d5-03"],
       ["用家辦思維撬動超高淨值客戶", "learning-notes.html#note-d5-04"],
