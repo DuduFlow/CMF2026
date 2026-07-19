@@ -373,39 +373,39 @@
           ],
           [
                 "投保心理學：洞察人性，經營未來——AI 保險時代下的破局",
-                "learning-notes.html?v=20260719-05#note-d6-05"
+                "notes/d6-05-luoshuking.html"
           ],
           [
                 "企業家客戶的銷售邏輯",
-                "learning-notes.html?v=20260719-05#note-d6-06"
+                "notes/d6-06-caojiping.html"
           ],
           [
                 "高客服務與面談的要點解析",
-                "learning-notes.html?v=20260719-05#note-d6-07"
+                "notes/d6-07-qianwenxi.html"
           ],
           [
                 "IP 打造與直播獲客",
-                "learning-notes.html?v=20260719-05#note-d6-08"
+                "learning-notes.html?v=20260719-08#note-d6-08"
           ],
           [
                 "守正創新：尋找變化中的不變——壽險顧問穿越週期的底層力量",
-                "learning-notes.html?v=20260719-05#note-d7-01"
+                "learning-notes.html?v=20260719-08#note-d7-01"
           ],
           [
                 "人生經營三部曲——保險的智慧",
-                "learning-notes.html?v=20260719-05#note-d7-02"
+                "learning-notes.html?v=20260719-08#note-d7-02"
           ],
           [
                 "持續打造績優與高客深度經營",
-                "learning-notes.html?v=20260719-05#note-d7-03"
+                "learning-notes.html?v=20260719-08#note-d7-03"
           ],
           [
                 "如何構建保險新生態",
-                "learning-notes.html?v=20260719-05#note-d7-04"
+                "learning-notes.html?v=20260719-08#note-d7-04"
           ],
           [
                 "企業家應具備四個財務思維",
-                "learning-notes.html?v=20260719-05#note-d7-05"
+                "learning-notes.html?v=20260719-08#note-d7-05"
           ]
     ]);
 
@@ -1127,7 +1127,7 @@
           setActivePage(next.dataset.tab);
         });
       });
-      $("#prepShortcut").addEventListener("click", () => { window.location.href = "learning-notes.html?v=20260719-05"; });
+      $("#prepShortcut").addEventListener("click", () => { window.location.href = "learning-notes.html?v=20260719-08"; });
       $("#featuredCourseJump").addEventListener("click", focusFeaturedCourse);
       document.addEventListener("click", (event) => {
         const link = event.target.closest('a[href^="#"]');

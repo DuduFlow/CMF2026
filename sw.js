@@ -1,11 +1,11 @@
 /* CMF 2026 精簡上傳版離線快取
    只快取本版網頁實際需要的檔案，避免弱網路上傳/安裝失敗。 */
-const VERSION = "cmf2026-cn-v26-20260719-wuxiuyi";
+const VERSION = "cmf2026-cn-v29-20260719-qianwenxi";
 const CORE = [
   "./",
   "index.html",
   "learning-notes.html",
-  "learning-notes.html?v=20260719-05",
+  "learning-notes.html?v=20260719-08",
   "notes/d5-01-baishidai-yinye.html",
   "notes/d5-02-zhangyifan.html",
   "notes/d5-03-chudongdong.html",
@@ -15,6 +15,9 @@ const CORE = [
   "notes/d6-02-yuzhongbin.html",
   "notes/d6-03-wanglizhong.html",
   "notes/d6-04-wuxiuyi.html",
+  "notes/d6-05-luoshuking.html",
+  "notes/d6-06-caojiping.html",
+  "notes/d6-07-qianwenxi.html",
   "assets/css/styles.css",
   "assets/js/app.js",
   "assets/js/train-data.js",
@@ -51,6 +54,10 @@ const CORE = [
   "assets/images/user-src/sight-wulongtan.jpeg",
   "assets/images/user-src/sight-furong-street.jpeg",
   "assets/images/user-src/sight-qushuiting.jpeg",
+  "assets/images/notes/d6-07/new-client-data.jpg",
+  "assets/images/notes/d6-07/client-cultivation.jpg",
+  "assets/images/notes/d6-07/wealth-flow.jpg",
+  "assets/images/notes/d6-07/plan-landing.jpg",
   "assets/images/notes/d5-03/customer-sources.jpg",
   "assets/images/notes/d5-03/sales-flow.jpg",
   "assets/images/notes/d5-04/client-system.jpg",
