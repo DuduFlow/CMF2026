@@ -1,11 +1,11 @@
 /* CMF 2026 精簡上傳版離線快取
    只快取本版網頁實際需要的檔案，避免弱網路上傳/安裝失敗。 */
-const VERSION = "cmf2026-cn-v24-20260719-yuzhongbin";
+const VERSION = "cmf2026-cn-v25-20260719-wanglizhong";
 const CORE = [
   "./",
   "index.html",
   "learning-notes.html",
-  "learning-notes.html?v=20260719-03",
+  "learning-notes.html?v=20260719-04",
   "notes/d5-01-baishidai-yinye.html",
   "notes/d5-02-zhangyifan.html",
   "notes/d5-03-chudongdong.html",
@@ -13,6 +13,7 @@ const CORE = [
   "notes/d5-05-guoxu.html",
   "notes/d6-01-liweibin.html",
   "notes/d6-02-yuzhongbin.html",
+  "notes/d6-03-wanglizhong.html",
   "assets/css/styles.css",
   "assets/js/app.js",
   "assets/js/train-data.js",
@@ -56,7 +57,10 @@ const CORE = [
   "assets/images/notes/d5-04/eight-risks.jpg",
   "assets/images/notes/d5-04/service-dimensions.jpg",
   "assets/images/notes/d5-04/talent-reasons.jpg",
-  "assets/images/notes/d6-02/forward.jpg"
+  "assets/images/notes/d6-02/forward.jpg",
+  "assets/images/notes/d6-03/culture-history.jpg",
+  "assets/images/notes/d6-03/three-part-system.jpg",
+  "assets/images/notes/d6-03/mission-vision-values.jpg"
 ];
 
 self.addEventListener("install", (event) => {
