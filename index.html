@@ -103,6 +103,7 @@
         <a class="quick-card reveal" href="learning-notes.html?v=20260720-15">
           <strong>學習筆記</strong>
           <span>課程重點、講師金句、案例與小組討論一次整理。</span>
+          <span class="ext-mini" data-href="https://duduflow.github.io/CMF2026-Learning/" role="link" tabindex="0" style="justify-self:end;margin-top:8px;display:inline-flex;align-items:center;gap:4px;padding:5px 11px;border:1px solid rgba(196,155,82,.35);border-radius:999px;color:#8a6a30;background:rgba(255,253,247,.7);font-size:11.5px;font-weight:900;line-height:1;white-space:nowrap;">筆記網站 ↗</span>
         </a>
       </div>
       </div>
@@ -254,5 +255,16 @@
   <script src="assets/js/train-data.js"></script>
   <script src="assets/js/latest-data.js"></script>
   <script src="assets/js/app.js"></script>
+  <script>
+    document.querySelectorAll(".ext-mini").forEach((el) => {
+      const go = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        window.open(el.dataset.href, "_blank", "noopener");
+      };
+      el.addEventListener("click", go);
+      el.addEventListener("keydown", (event) => { if (event.key === "Enter" || event.key === " ") go(event); });
+    });
+  </script>
 </body>
 </html>

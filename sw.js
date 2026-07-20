@@ -1,6 +1,6 @@
 /* CMF 2026 精簡上傳版離線快取
    只快取本版網頁實際需要的檔案，避免弱網路上傳/安裝失敗。 */
-const VERSION = "cmf2026-cn-v36-20260720-qihao";
+const VERSION = "cmf2026-cn-v38-20260720-extlink-fix";
 const CORE = [
   "./",
   "index.html",
