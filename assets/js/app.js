@@ -388,15 +388,15 @@
           ],
           [
                 "人生經營三部曲——保險的智慧",
-                "learning-notes.html?v=20260720-13#note-d7-02"
+                "learning-notes.html?v=20260720-14#note-d7-02"
           ],
           [
                 "持續打造績優與高客深度經營",
-                "learning-notes.html?v=20260720-13#note-d7-03"
+                "notes/d7-03-zhaoyang.html"
           ],
           [
                 "企業家應具備四個財務思維",
-                "learning-notes.html?v=20260720-13#note-d7-05"
+                "learning-notes.html?v=20260720-14#note-d7-05"
           ]
     ]);
 
@@ -1118,7 +1118,7 @@
           setActivePage(next.dataset.tab);
         });
       });
-      $("#prepShortcut").addEventListener("click", () => { window.location.href = "learning-notes.html?v=20260720-13"; });
+      $("#prepShortcut").addEventListener("click", () => { window.location.href = "learning-notes.html?v=20260720-14"; });
       $("#featuredCourseJump").addEventListener("click", focusFeaturedCourse);
       document.addEventListener("click", (event) => {
         const link = event.target.closest('a[href^="#"]');
