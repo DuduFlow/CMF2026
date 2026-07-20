@@ -266,14 +266,9 @@
                             "主理人：徐千水、韓綱"
                       ],
                       [
-                            "08:30-09:00",
-                            "守正創新：尋找變化中的不變——壽險顧問穿越週期的底層力量",
-                            "趙大瑋（國內頂流保險評論、瑋瑋道保〔公眾號＋視頻號〕主理人）"
-                      ],
-                      [
                             "09:00-09:50",
-                            "人生經營三部曲——保險的智慧",
-                            "王辰（清華才子，CMF 特約首席講師）"
+                            "守正創新——2026 資產配置的底層邏輯",
+                            "林海川（CMF 大會創始人之一、CMF 大會執行秘書長）"
                       ],
                       [
                             "09:50-10:10",
@@ -317,8 +312,8 @@
                       ],
                       [
                             "15:50-16:40",
-                            "守正創新——2026 資產配置的底層邏輯",
-                            "林海川（CMF 大會創始人之一、CMF 大會執行秘書長）"
+                            "人生經營三部曲——保險的智慧",
+                            "王辰（清華才子，CMF 特約首席講師）"
                       ],
                       [
                             "16:40-17:10",
@@ -388,24 +383,24 @@
                 "notes/d6-08-liyang.html"
           ],
           [
-                "守正創新：尋找變化中的不變——壽險顧問穿越週期的底層力量",
-                "learning-notes.html?v=20260719-10#note-d7-01"
+                "守正創新——2026 資產配置的底層邏輯",
+                "notes/d7-01-linhaichuan.html"
           ],
           [
                 "人生經營三部曲——保險的智慧",
-                "learning-notes.html?v=20260719-10#note-d7-02"
+                "learning-notes.html?v=20260720-12#note-d7-02"
           ],
           [
                 "持續打造績優與高客深度經營",
-                "learning-notes.html?v=20260719-10#note-d7-03"
+                "learning-notes.html?v=20260720-12#note-d7-03"
           ],
           [
                 "如何構建保險新生態",
-                "learning-notes.html?v=20260719-10#note-d7-04"
+                "learning-notes.html?v=20260720-12#note-d7-04"
           ],
           [
                 "企業家應具備四個財務思維",
-                "learning-notes.html?v=20260719-10#note-d7-05"
+                "learning-notes.html?v=20260720-12#note-d7-05"
           ]
     ]);
 
@@ -1127,7 +1122,7 @@
           setActivePage(next.dataset.tab);
         });
       });
-      $("#prepShortcut").addEventListener("click", () => { window.location.href = "learning-notes.html?v=20260719-10"; });
+      $("#prepShortcut").addEventListener("click", () => { window.location.href = "learning-notes.html?v=20260720-12"; });
       $("#featuredCourseJump").addEventListener("click", focusFeaturedCourse);
       document.addEventListener("click", (event) => {
         const link = event.target.closest('a[href^="#"]');

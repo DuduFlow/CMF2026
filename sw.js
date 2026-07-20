@@ -1,11 +1,11 @@
 /* CMF 2026 精簡上傳版離線快取
    只快取本版網頁實際需要的檔案，避免弱網路上傳/安裝失敗。 */
-const VERSION = "cmf2026-cn-v31-20260719-liyang";
+const VERSION = "cmf2026-cn-v33-20260720-linhaichuan";
 const CORE = [
   "./",
   "index.html",
   "learning-notes.html",
-  "learning-notes.html?v=20260719-10",
+  "learning-notes.html?v=20260720-12",
   "notes/d5-01-baishidai-yinye.html",
   "notes/d5-02-zhangyifan.html",
   "notes/d5-03-chudongdong.html",
@@ -19,6 +19,7 @@ const CORE = [
   "notes/d6-06-caojiping.html",
   "notes/d6-07-qianwenxi.html",
   "notes/d6-08-liyang.html",
+  "notes/d7-01-linhaichuan.html",
   "assets/css/styles.css",
   "assets/js/app.js",
   "assets/js/train-data.js",
