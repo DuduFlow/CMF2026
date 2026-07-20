@@ -388,19 +388,15 @@
           ],
           [
                 "人生經營三部曲——保險的智慧",
-                "learning-notes.html?v=20260720-12#note-d7-02"
+                "learning-notes.html?v=20260720-13#note-d7-02"
           ],
           [
                 "持續打造績優與高客深度經營",
-                "learning-notes.html?v=20260720-12#note-d7-03"
-          ],
-          [
-                "如何構建保險新生態",
-                "learning-notes.html?v=20260720-12#note-d7-04"
+                "learning-notes.html?v=20260720-13#note-d7-03"
           ],
           [
                 "企業家應具備四個財務思維",
-                "learning-notes.html?v=20260720-12#note-d7-05"
+                "learning-notes.html?v=20260720-13#note-d7-05"
           ]
     ]);
 
@@ -1122,7 +1118,7 @@
           setActivePage(next.dataset.tab);
         });
       });
-      $("#prepShortcut").addEventListener("click", () => { window.location.href = "learning-notes.html?v=20260720-12"; });
+      $("#prepShortcut").addEventListener("click", () => { window.location.href = "learning-notes.html?v=20260720-13"; });
       $("#featuredCourseJump").addEventListener("click", focusFeaturedCourse);
       document.addEventListener("click", (event) => {
         const link = event.target.closest('a[href^="#"]');
@@ -1200,7 +1196,15 @@
         if (dist >= THRESHOLD && window.scrollY <= 0) {
           label.textContent = "更新中…";
           ptr.classList.add("loading");
-          setTimeout(() => location.reload(), 120);
+          (async () => {
+            try {
+              if (window.caches) { const keys = await caches.keys(); await Promise.all(keys.map((k) => caches.delete(k))); }
+              if (navigator.serviceWorker) { const regs = await navigator.serviceWorker.getRegistrations(); await Promise.all(regs.map((r) => r.update())); }
+            } catch (_) {}
+            const u = new URL(location.href);
+            u.searchParams.set("r", Date.now().toString(36));
+            location.replace(u.toString());
+          })();
         } else {
           ptr.classList.remove("show", "ready");
         }
