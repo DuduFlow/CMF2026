@@ -388,7 +388,7 @@
           ],
           [
                 "人生經營三部曲——保險的智慧",
-                "learning-notes.html?v=20260720-15#note-d7-02"
+                "notes/d7-02-wangchen.html"
           ],
           [
                 "持續打造績優與高客深度經營",
@@ -1118,7 +1118,7 @@
           setActivePage(next.dataset.tab);
         });
       });
-      $("#prepShortcut").addEventListener("click", () => { window.location.href = "learning-notes.html?v=20260720-15"; });
+      $("#prepShortcut").addEventListener("click", () => { window.location.href = "learning-notes.html?v=20260720-16"; });
       $("#featuredCourseJump").addEventListener("click", focusFeaturedCourse);
       document.addEventListener("click", (event) => {
         const link = event.target.closest('a[href^="#"]');
