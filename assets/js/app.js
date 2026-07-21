@@ -890,6 +890,7 @@
       const returnTrainSeat = (window.CMF_RETURN_TRAIN_ASSIGNMENTS || {})[personName] || {};
       const hasReturnTrainSeat = Boolean(returnTrainSeat.car && returnTrainSeat.seat);
       const latestAssignment = (window.CMF_LATEST_ASSIGNMENTS || {})[personName] || {};
+      const flightSeat = (window.CMF_RETURN_FLIGHT_ASSIGNMENTS || {})[personName] || "";
       const courseMainText = personRoom.courseGroup || (personRoom.courseExempt ? "免分組" : "待補");
       const courseSubText = personRoom.courseLeader
         ? `組長：${esc(personRoom.courseLeader)}`
@@ -965,6 +966,36 @@
           </div>
         </div>
       `;
+      const flightHtml = `
+        <div class="transport-subhead" style="margin-top:14px;">
+          <span>回程航班</span>
+          <b>SC4085｜7/21 13:25</b>
+        </div>
+        <div class="train-timeline">
+          <div class="timeline-leg ${flightSeat ? "confirmed" : "pending"}">
+            <span class="timeline-dot"></span>
+            <div class="timeline-leg-main">
+              <span>回程飛機</span>
+              <b>SC4085｜青島膠東 → 桃園 T2</b>
+              <small>7/21（二）　13:25–15:45</small>
+            </div>
+          </div>
+          <div class="train-seat-strip ${flightSeat ? "" : "pending"}">
+            <div>
+              <span>回程機位</span>
+              <b>${esc(flightSeat || "後續更新")}</b>
+            </div>
+            <div>
+              <span>登機門</span>
+              <b>80</b>
+            </div>
+            <div>
+              <span>集合時間</span>
+              <b>12:45</b>
+            </div>
+          </div>
+        </div>
+      `;
       const busHtml = `
         <div class="bus-assignment">
           <span>遊覽車次</span>
@@ -1002,7 +1033,7 @@
         <div class="result-name">${esc(personName)}</div>
         <div class="result-unit">${esc(person[2])}</div>
         <div class="lookup-sections">
-          ${section("交通資訊", [badge("遊覽車已確認"), badge("去程高鐵已確認"), hasReturnTrainSeat ? badge("回程座位已確認") : badge("回程座位待更新", "pending")], `${busHtml}${trainHtml}`)}
+          ${section("交通資訊", [badge("遊覽車已確認"), badge("去程高鐵已確認"), hasReturnTrainSeat ? badge("回程高鐵已確認") : badge("回程高鐵待更新", "pending"), flightSeat ? badge("回程機位已確認") : badge("回程機位待更新", "pending")], `${busHtml}${trainHtml}${flightHtml}`)}
           ${section("住宿資訊", [badge("住宿已列"), badge("房號待補", "pending")], stayHtml)}
           ${section("活動資訊", [badge("桌次已確認"), badge("課程分組已列")], assignmentHtml)}
         </div>
@@ -1118,7 +1149,7 @@
           setActivePage(next.dataset.tab);
         });
       });
-      $("#prepShortcut").addEventListener("click", () => { window.location.href = "learning-notes.html?v=20260720-16"; });
+      $("#prepShortcut").addEventListener("click", () => { window.location.href = "learning-notes.html?v=20260721-17"; });
       $("#featuredCourseJump").addEventListener("click", focusFeaturedCourse);
       document.addEventListener("click", (event) => {
         const link = event.target.closest('a[href^="#"]');
