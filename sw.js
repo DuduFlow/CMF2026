@@ -1,6 +1,6 @@
 /* CMF 2026 精簡上傳版離線快取
    只快取本版網頁實際需要的檔案，避免弱網路上傳/安裝失敗。 */
-const VERSION = "cmf2026-cn-v41-20260721-gate80";
+const VERSION = "cmf2026-cn-v42-20260721-autoupdate";
 const CORE = [
   "./",
   "index.html",
@@ -27,6 +27,7 @@ const CORE = [
   "assets/js/app.js",
   "assets/js/train-data.js",
   "assets/js/latest-data.js",
+  "assets/js/autoupdate.js",
   "site.webmanifest",
   "browserconfig.xml",
   "favicon.ico",
